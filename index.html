@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peach Passport</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--blush:#FBF1ED;--peach:#E8927C;--coral:#DE6B52;--coral-ink:#C0553C;--plum:#3D2B33;--soft:#8A757D;--gold:#C99A5B;--card:#FFF;--line:#EEE0DA;--ok:#5B9A78;--warn:#D69A3C;--bad:#C4553D;--pill:#F6E7E1;--shadow:0 8px 24px -14px rgba(120,60,50,.35)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--blush);color:var(--plum);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
+.wrap{max-width:480px;margin:0 auto;padding:0 18px 120px}
+h1,h2,h3{font-family:'Fraunces',serif;margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit;font-size:16px}
+.top{position:sticky;top:0;z-index:30;background:rgba(251,241,237,.92);backdrop-filter:blur(10px);max-width:480px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
+.top .brand{font-family:'Fraunces';font-weight:600;font-size:15px}
+.top .sp{flex:1}
+.seg{display:flex;background:var(--pill);border-radius:20px;padding:3px}
+.seg button{font-size:12px;font-weight:600;padding:7px 11px;border-radius:18px;color:var(--soft)}
+.seg button.on{background:#fff;color:var(--coral-ink);box-shadow:0 2px 5px -2px rgba(120,60,50,.3)}
+.backrow{padding:14px 0 2px}.back{font-size:13px;font-weight:600;color:var(--soft);padding:6px 0}
+.card{background:var(--card);border-radius:20px;padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
+.eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--peach);font-weight:700;margin-bottom:10px}
+.muted{color:var(--soft)}.center{text-align:center}
+.hero{text-align:center;padding:24px 0 4px}
+.hero .big{font-size:46px;filter:drop-shadow(0 6px 10px rgba(222,107,82,.22))}
+.hero h1{font-size:26px;font-weight:600;margin-top:8px}
+.hero .tag{font-family:'Fraunces';font-style:italic;color:var(--coral-ink);font-size:15px}
+.avatar{width:56px;height:56px;border-radius:50%;flex:none;display:grid;place-items:center;font-family:'Fraunces';font-weight:600;font-size:22px;color:#fff;background:linear-gradient(135deg,var(--peach),var(--coral));overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.progresswrap{height:9px;background:var(--pill);border-radius:6px;overflow:hidden;margin:12px 0 5px}
+.progressbar{height:100%;background:linear-gradient(90deg,var(--peach),var(--coral));border-radius:6px;transition:width .5s}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.stat{background:var(--blush);border-radius:14px;padding:13px 8px;text-align:center}
+.stat .v{font-family:'Fraunces';font-size:21px;font-weight:600}
+.stat .k{font-size:10.5px;color:var(--soft);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.photobox img{width:100%;border-radius:14px;display:block}
+.photo-ph{width:100%;height:130px;border:1.5px dashed var(--peach);border-radius:14px;display:grid;place-items:center;color:var(--peach);background:#FFF7F4;font-size:13px;margin-bottom:12px}
+.rowlist{background:var(--card);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.lrow{display:flex;align-items:center;gap:14px;padding:15px 16px;border-bottom:1px solid var(--line);width:100%;text-align:left;background:none}
+.lrow:last-child{border-bottom:none}.lrow:active{background:var(--blush)}
+.wnum{width:38px;height:38px;border-radius:12px;flex:none;display:grid;place-items:center;font-family:'Fraunces';font-weight:600;font-size:14px;background:var(--pill);color:var(--soft)}
+.lrow.done .wnum{background:var(--coral);color:#fff}
+.lrow .t{flex:1;min-width:0}.lrow .t .h{font-weight:600;font-size:15px}
+.lrow .t .s{font-size:12px;color:var(--soft);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lrow .r{font-size:12px;color:var(--soft);font-weight:600;flex:none;display:flex;align-items:center;gap:6px}
+.lrow .chev{color:var(--peach);font-size:18px}
+.dot2{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--line)}.dot2.on{background:var(--ok)}
+.light{display:inline-block;width:10px;height:10px;border-radius:50%}.light.g{background:var(--ok)}.light.y{background:var(--warn)}.light.r{background:var(--bad)}
+.section-label{font-family:'Fraunces';font-size:13px;font-weight:600;color:var(--plum);margin:22px 2px 10px;display:flex;align-items:center;gap:8px}
+.section-label .ph{font-size:10.5px;font-weight:600;color:var(--soft);background:var(--pill);padding:2px 8px;border-radius:10px}
+.exlist{margin-top:4px}
+.ex{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.ex:last-child{border-bottom:none}
+.exbox{width:22px;height:22px;border-radius:7px;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:12px;color:#fff;background:#fff}
+.ex.on .exbox{background:var(--coral);border-color:var(--coral)}
+.ex .info{flex:1;min-width:0}.ex .en{font-weight:600;font-size:14px}.ex .em{font-size:11.5px;color:var(--soft);margin-top:1px}
+.ex .kg{font-family:'Fraunces';font-weight:600;font-size:15px;color:var(--coral-ink);flex:none;text-align:right;min-width:52px}
+.ex .kgin{width:70px;flex:none}
+.ex .kgin input{width:100%;padding:7px 9px;font-size:14px;border:1px solid var(--line);border-radius:9px;text-align:center;background:#FFFDFC}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--coral);color:#fff;font-weight:600;font-size:15px;padding:15px;border-radius:15px;width:100%;box-shadow:0 8px 18px -6px rgba(222,107,82,.5)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:#fff;color:var(--coral-ink);box-shadow:none;border:1px solid var(--line)}
+.btn.gold{background:var(--gold)}.btn.sm{width:auto;padding:9px 14px;font-size:13px;border-radius:12px}
+.fab{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:40;max-width:480px;width:calc(100% - 36px)}
+label.f{display:block;margin-bottom:12px}
+label.f .lab{font-size:12px;font-weight:600;color:var(--soft);margin-bottom:5px;display:block}
+.inp{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#FFFDFC;color:var(--plum);outline:none}
+.inp:focus{border-color:var(--peach);box-shadow:0 0 0 3px rgba(232,146,124,.16)}
+textarea.inp{min-height:52px;resize:vertical}
+.r3{display:flex;gap:8px}.r3>label{flex:1}
+.chk{display:flex;align-items:center;gap:11px;padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:12px;font-weight:600;font-size:14px}
+.chk input{width:22px;height:22px;accent-color:var(--coral)}
+.lightpick{display:flex;gap:8px;margin-bottom:6px}
+.lightpick button{flex:1;padding:12px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px}
+.lightpick button.sel{border-color:var(--coral);box-shadow:0 0 0 3px rgba(222,107,82,.14)}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 10px;border-radius:20px}
+.badge.starter{background:#F0E1C6;color:#8a6a35}.badge.active{background:#DEEEE4;color:var(--ok)}.badge.grad{background:linear-gradient(135deg,var(--gold),#b8863f);color:#fff}
+.note{font-size:12.5px;color:var(--soft);background:var(--blush);border-radius:12px;padding:11px 13px;margin-top:8px;line-height:1.5}
+.remind{background:linear-gradient(135deg,#FFF6E9,#FDEBD6);border:1px solid var(--gold-soft,#EFDCBE);border-radius:16px;padding:14px 16px;margin-bottom:14px;font-size:13.5px;box-shadow:var(--shadow)}
+.remind b{color:#8a6a35}
+.select-client{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:#FFFDFC;font-size:15px;margin-bottom:12px}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:var(--plum);color:#fff;padding:12px 20px;border-radius:30px;font-size:13.5px;z-index:200;box-shadow:var(--shadow)}
+.emptyx{text-align:center;padding:34px 20px;color:var(--soft)}.emptyx .b{font-size:40px}
+.smalllink{color:var(--soft);font-size:12.5px;text-decoration:underline;padding:6px}
+.ci{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.cichip{background:var(--blush);border-radius:11px;padding:7px 11px;font-size:12px}.cichip b{font-family:'Fraunces';color:var(--plum)}
+.adcard{display:flex;align-items:center;gap:14px;background:var(--card);border-radius:18px;padding:18px;box-shadow:var(--shadow);margin-bottom:12px;width:100%;text-align:left}
+.adcard .em{font-size:26px;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--pill);flex:none}
+.adcard h3{font-size:16px}.adcard .s{font-size:12px;color:var(--soft);margin-top:2px}
+.adcard .chev{margin-left:auto;color:var(--peach);font-size:20px}
+.exedit{background:var(--card);border-radius:14px;padding:12px;box-shadow:var(--shadow);margin-bottom:10px}
+.exedit .delx{float:right;color:var(--bad);font-size:12px;font-weight:600}
+.exedit input{margin-bottom:8px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toastRoot"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>
+/* =======================================================================
+   ⬇⬇⬇  FIREBASE 设定  ⬇⬇⬇
+   ======================================================================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyANx3y_qTMk84gP4PviG_nHTX7DcYE4U4I",
+  authDomain: "peach-project-d33eb.firebaseapp.com",
+  projectId: "peach-project-d33eb",
+  storageBucket: "peach-project-d33eb.firebasestorage.app",
+  messagingSenderId: "887712153845",
+  appId: "1:887712153845:web:3381f5040059f24a08c5bc"
+};
+const COL="peach_clients"; const CFGID="__config";
+const ADMIN_PW="pp930830"; // Admin 后台密码
+let db=null,FB_OK=false,FB_ERR="";
+try{
+  if(firebaseConfig.apiKey && firebaseConfig.apiKey!=="PASTE_HERE" && typeof firebase!=="undefined"){
+    firebase.initializeApp(firebaseConfig); db=firebase.firestore(); FB_OK=true;
+  }else if(typeof firebase==="undefined"){ FB_ERR="Firebase 没载入（检查网络）"; }
+  else{ FB_ERR="还没贴 Firebase 设定"; }
+}catch(e){ FB_ERR=(e&&e.message)||"Firebase 初始化失败"; }
+
+/* ===== default programme config (real Project Fit workouts) ===== */
+const DEFAULT_CFG={
+  id:CFGID,
+  warmup:["Dynamic mobility"],
+  reminders:{coach:"",student:""},
+  workouts:{
+    A:{name:"Glute A",ex:[
+      {n:"Hip Thrust",m:"4×8–10 · 空杆→5kg/边→7.5kg/边 ×2"},
+      {n:"Romanian Deadlift",m:"3×10 · 5kg ×2→7.5kg (视情况)"},
+      {n:"Lunges (glute-focused)",m:"徒手→2.5kg/边→5kg/边 (视情况)"},
+      {n:"Cable Kickback",m:"3×15 · 5kg→7.5kg ×2"},
+      {n:"Hip Abductor",m:"3×20 · 5kg→10kg→15kg"}]},
+    B:{name:"Glute B",ex:[
+      {n:"Hip Thrust",m:"4×8–10 · 空杆→5kg/边→7.5kg/边 ×2"},
+      {n:"Romanian Deadlift",m:"3×10 · 5kg ×2→7.5kg (视情况)"},
+      {n:"Hamstring Curl",m:"3×10–15 · 从最轻开始，逐步加"},
+      {n:"Hip Abductor",m:"3×20 · 5kg→10kg→15kg"},
+      {n:"Plank",m:"3组 · 每组30秒 (视情况)"}]},
+    C:{name:"Glute C",ex:[
+      {n:"Hip Thrust",m:"4×8–10 · 空杆→5kg/边→7.5kg/边 ×2"},
+      {n:"Stiff Leg Deadlift",m:"3×10 · 空杆学动作，之后比RDL −15% (视情况)"},
+      {n:"Smith Machine Lunges (glute)",m:"徒手→2.5kg/边→5kg/边 (视情况)"},
+      {n:"Cable Pull Through",m:"3×15 · 10kg→15kg→…"},
+      {n:"Glute Extension",m:"3×20 · 徒手→5kg→10kg (视情况)"}]},
+    D:{name:"Glute D",ex:[
+      {n:"Smith Machine Sumo Squat",m:"4×8–10 · 空杆→2.5kg/边→5kg/边 ×2 (视情况)"},
+      {n:"Bulgarian Split Squat",m:"3×10 · 沿用之前进度"},
+      {n:"Hamstring Curl",m:"3组 · 沿用之前进度"},
+      {n:"Cable Kickback",m:"3×12–15 (可加重到10次) · 沿用之前进度"},
+      {n:"Hip Abduction",m:"3组 · 沿用之前进度"}]},
+    E:{name:"Glute E",ex:[
+      {n:"Hip Thrust",m:"4×8–10 · 沿用之前进度"},
+      {n:"Romanian Deadlift",m:"3×10 · 沿用之前进度"},
+      {n:"Lunges (glute-focused)",m:"沿用之前进度"},
+      {n:"Cable Kickback",m:"3×15 · 沿用之前进度"},
+      {n:"Hip Abductor",m:"3×20 · 沿用之前进度"}]},
+    F:{name:"Glute F",ex:[
+      {n:"Squat",m:"4×8–10 · 沿用之前进度"},
+      {n:"Walking Lunges (大步幅·夹臀)",m:"沿用之前进度"},
+      {n:"Cable Pull Through",m:"3×15 · 沿用之前进度"},
+      {n:"Hip Abductor",m:"3×20 · 沿用之前进度"},
+      {n:"Side Plank",m:"3组 · 每边"}]},
+  }
+};
+let CFG=JSON.parse(JSON.stringify(DEFAULT_CFG));
+function WO(k){return (CFG.workouts&&CFG.workouts[k])||{name:k,ex:[]};}
+function ww(i){return i<4?["A","B"]:i<8?["C","D"]:["E","F"];}
+function phase(i){return i<4?{tag:"Foundation",sub:"W1–4 · RPE 6–7 打技术"}:i<8?{tag:"Overload",sub:"W5–8 · RPE 7–8 加重"}:{tag:"High Intensity",sub:"W9–12 · RPE 8–9 冲成长"};}
+
+/* ===== storage (Firestore) ===== */
+let _cache={};
+async function allClients(){const qs=await db.collection(COL).get();const a=[];_cache={};qs.forEach(d=>{if(d.id.indexOf("__")===0)return;const c=d.data();a.push(c);_cache[c.id]=c;});return a;}
+async function getIndex(){const a=await allClients();return a.map(c=>({id:c.id,name:c.name,code:c.code,coach:c.coach,startDate:c.startDate,photo:c.day1&&c.day1.photo?1:0}));}
+async function getClient(id){if(_cache[id])return _cache[id];try{const s=await db.collection(COL).doc(id).get();if(s.exists){_cache[id]=s.data();return _cache[id];}return null;}catch(e){return null;}}
+async function saveClient(c){_cache[c.id]=c;try{await db.collection(COL).doc(c.id).set(c);}catch(e){toast("保存失败，检查网络");}}
+async function loadCfg(){try{const s=await db.collection(COL).doc(CFGID).get();
+  if(s.exists){CFG=Object.assign(JSON.parse(JSON.stringify(DEFAULT_CFG)),s.data());if(!CFG.workouts)CFG.workouts=DEFAULT_CFG.workouts;if(!CFG.warmup)CFG.warmup=DEFAULT_CFG.warmup.slice();if(!CFG.reminders)CFG.reminders={coach:"",student:""};}
+  else{await db.collection(COL).doc(CFGID).set(DEFAULT_CFG);CFG=JSON.parse(JSON.stringify(DEFAULT_CFG));}
+}catch(e){}}
+async function saveCfg(){CFG.id=CFGID;try{await db.collection(COL).doc(CFGID).set(CFG);}catch(e){toast("保存失败");}}
+
+/* ===== client factory ===== */
+function blankS(){return{done:false,date:"",ex:[],wt:[],notes:""};}
+function newClient(name,code,coach){const weeks=[];for(let w=0;w<12;w++)weeks.push({goal:"",check:{weight:"",waist:"",hip:"",light:""},s1:blankS(),s2:blankS()});
+  const titles=["Discover · 身体评估","Activate · 唤醒臀肌","Believe · 看见改变","Commit · 加入旅程"];
+  return{id:"c"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),name,code,coach,startDate:new Date().toISOString().slice(0,10),
+    day1:{photo:"",weight:"",hip:"",waist:"",goal:"",why:""},starter:titles.map(t=>({title:t,done:false,date:"",notes:""})),weeks,
+    graduation:{done:false,date:"",photo:"",weight:"",hip:"",message:""}};}
+function demo(){const c=newClient("Michelle (示范)","PEACH01","Zeta");
+  c.day1={photo:"",weight:"58",hip:"92",waist:"71",goal:"想穿回旧牛仔裤、拍照有 shape",why:"生完宝宝后想找回自信"};
+  c.starter.forEach((s,i)=>{s.done=true;s.date="2026-06-0"+(i+2);});c.starter[3].notes="臀部发力明显进步，已邀请进 12 周 ✓";
+  const kg=[["空杆","5kg","徒手","5kg","10kg"],["5kg/边","5kg","2.5kg/边","7.5kg","10kg"]];
+  for(let w=0;w<3;w++){const k=c.weeks[w];
+    k.goal=w===0?"学会正确 Hip Thrust 发力":w===1?"稳定 RDL 动作":"加重 Cable Kickback";
+    k.check={weight:(58-w*0.3).toFixed(1),waist:(71-w)+"",hip:(92+w*0.4).toFixed(1),light:w<2?"g":"y"};
+    [k.s1,k.s2].forEach((s,si)=>{s.done=true;s.date="2026-06-"+(10+w*3+si);s.ex=[true,true,true,true,true];s.wt=kg[si].slice();});}
+  c.weeks[3].goal="完成 Foundation 阶段";return c;}
+
+function prog(c){let d=0,t=0;c.starter.forEach(s=>{t++;if(s.done)d++;});c.weeks.forEach(w=>{t+=2;if(w.s1.done)d++;if(w.s2.done)d++;});t++;if(c.graduation.done)d++;return{done:d,total:t,pct:t?Math.round(d/t*100):0};}
+function badge(c){return c.graduation.done?'<span class="badge grad">🎓 已毕业</span>':c.weeks.some(w=>w.s1.done||w.s2.done)?'<span class="badge active">12周进行中</span>':'<span class="badge starter">Starter</span>';}
+
+/* ===== utils ===== */
+const app=document.getElementById("app");
+function esc(s){return(s==null?"":""+s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+function v(id){const e=document.getElementById(id);return e?e.value.trim():"";}
+function toast(m){const t=document.createElement("div");t.className="toast";t.textContent=m;document.getElementById("toastRoot").appendChild(t);setTimeout(()=>t.remove(),1800);}
+function pickPhoto(cb){const inp=document.createElement("input");inp.type="file";inp.accept="image/*";inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const mx=640,sc=Math.min(1,mx/Math.max(img.width,img.height));const cv=document.createElement("canvas");cv.width=img.width*sc;cv.height=img.height*sc;cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);cb(cv.toDataURL("image/jpeg",.72));};img.src=rd.result;};rd.readAsDataURL(f);};inp.click();}
+
+/* ===== router ===== */
+let S={role:"girl",view:"gpick",cid:null,wk:0,adminUnlocked:false};
+function setRole(r){S.role=r;S.view=r==="coach"?"clist":(r==="admin"?(S.adminUnlocked?"admin":"admin_login"):"gpick");render();}
+function go(view,d){S.view=view;if(d)Object.assign(S,d);window.scrollTo(0,0);render();}
+function top(){return `<div class="top"><span class="brand">🍑 Peach Passport</span><span class="sp"></span>
+  <div class="seg"><button class="${S.role==='girl'?'on':''}" onclick="setRole('girl')">👀 学员</button>
+  <button class="${S.role==='coach'?'on':''}" onclick="setRole('coach')">🧑‍🏫 教练</button>
+  <button class="${S.role==='admin'?'on':''}" onclick="setRole('admin')">🛠</button></div></div>`;}
+
+async function render(){let h="";
+  if(S.role==="admin"){
+    if(!S.adminUnlocked){h=adminLoginScreen();}
+    else if(S.view==="admin_wo")h=adminWOScreen();else if(S.view==="admin_wopick")h=adminWOPick();
+    else if(S.view==="admin_warm")h=adminWarmScreen();else if(S.view==="admin_rem")h=adminRemScreen();else h=adminHome();
+  }else if(S.role==="coach"){
+    if(S.view==="cweek")h=await weekScreen(true);else if(S.view==="cclient")h=await clientScreen(true);else h=await listScreen();
+  }else{
+    if(S.view==="gweek")h=await weekScreen(false);else if(S.view==="gview")h=await clientScreen(false);else h=await gpickScreen();
+  }
+  app.innerHTML=top()+`<div class="wrap">${h}</div>`;
+  if(S._after){const f=S._after;S._after=null;f();}
+}
+
+/* ===== coach list ===== */
+async function listScreen(){
+  const ix=(await getIndex()).slice().sort((a,b)=>(b.startDate||"").localeCompare(a.startDate||""));
+  const rem=CFG.reminders&&CFG.reminders.coach?`<div class="remind"><b>📣 给教练：</b> ${esc(CFG.reminders.coach)}</div>`:'';
+  let rows;
+  if(!ix.length)rows=`<div class="emptyx"><div class="b">🍑</div><p>还没有学员，点下面建立第一位。</p></div>`;
+  else rows=`<div class="rowlist">`+ix.map(c=>`<button class="lrow" onclick="go('cclient',{cid:'${c.id}'})">
+    <div class="avatar" style="width:38px;height:38px;font-size:15px;border-radius:12px" data-id="${c.id}">${c.photo?'':esc((c.name||'?').slice(0,1).toUpperCase())}</div>
+    <div class="t"><div class="h">${esc(c.name)}</div><div class="s">代号 ${esc(c.code)} · ${esc(c.coach||'—')}</div></div>
+    <div class="r" data-prog="${c.id}">···</div><span class="chev">›</span></button>`).join("")+`</div>`;
+  S._after=()=>{ix.forEach(async c=>{const f=await getClient(c.id);if(!f)return;const pe=document.querySelector(`[data-prog="${c.id}"]`);if(pe)pe.textContent=prog(f).pct+"%";if(f.day1.photo){const a=document.querySelector(`.avatar[data-id="${c.id}"]`);if(a)a.innerHTML=`<img src="${f.day1.photo}">`;}});};
+  return `${rem}<div style="margin:16px 2px 12px"><div class="eyebrow" style="margin:0">教练后台</div><h1 style="font-size:24px">${ix.length} 位 Peach Girl</h1></div>${rows}
+    <div class="fab"><button class="btn" onclick="newSheet()">＋ 建立新学员</button></div>`;
+}
+function newSheet(){showModal(`<h2 style="font-size:20px">新 Peach Girl 🍑</h2><p class="muted" style="font-size:12.5px;margin:4px 0 14px">建好后把名字+代号给学员，她就能在学员视角登入看到自己。</p>
+    <label class="f"><span class="lab">名字</span><input class="inp" id="n_name" placeholder="Michelle"></label>
+    <label class="f"><span class="lab">专属代号</span><input class="inp" id="n_code"></label>
+    <label class="f"><span class="lab">负责教练</span><input class="inp" id="n_coach" placeholder="Zeta / Evon"></label>
+    <button class="btn" onclick="createC()">建立</button>`);
+  document.getElementById("n_code").value="PEACH"+Math.floor(1000+Math.random()*9000);}
+async function createC(){const name=v('n_name'),code=v('n_code').toUpperCase(),coach=v('n_coach');
+  if(!name||!code){toast("请填名字和代号");return;}const ix=await getIndex();
+  if(ix.some(x=>(x.code||"").toUpperCase()===code)){toast("代号已用");return;}
+  const c=newClient(name,code,coach);await saveClient(c);closeModal();toast("已建立 ✓");go('cclient',{cid:c.id});}
+
+/* ===== client overview ===== */
+async function clientScreen(edit){
+  const c=await getClient(S.cid);if(!c){S.view=edit?"clist":"gpick";return render();}
+  const p=prog(c),nx=next(c);
+  const backBtn=edit?`<button class="back" onclick="go('clist')">‹ 返回学员列表</button>`:`<button class="back" onclick="go('gpick')">‹ 换一位</button>`;
+  const rem=(!edit&&CFG.reminders&&CFG.reminders.student)?`<div class="remind"><b>💌 提醒：</b> ${esc(CFG.reminders.student)}</div>`:'';
+  let h=`<div class="backrow">${backBtn}</div>${rem}
+  <div class="card" style="text-align:center;background:linear-gradient(160deg,#fff,#FFF4F0)">
+    <div class="avatar" style="margin:2px auto 10px">${c.day1.photo?`<img src="${c.day1.photo}">`:esc(c.name.slice(0,1).toUpperCase())}</div>
+    <h1 style="font-size:22px">${esc(c.name)}</h1><div style="margin:8px 0">${badge(c)}</div>
+    <div class="progresswrap"><div class="progressbar" style="width:${p.pct}%"></div></div>
+    <div class="muted" style="font-size:12.5px">完成 <b style="color:var(--coral-ink)">${p.pct}%</b> · ${p.done}/${p.total}</div>
+    ${nx?`<div class="note" style="margin-top:12px;text-align:left">👉 下一步：<b>${esc(nx)}</b></div>`:`<div class="note" style="margin-top:12px">🎉 完成了整个旅程！</div>`}</div>`;
+  if(!edit)h+=`<div class="card"><div class="eyebrow">每次训练后</div><div style="font-size:13.5px">💪 1 勺 Whey Protein ＋ 5g Creatine — 帮你备好，练完就喝。</div></div>`;
+  h+=baseCard(c,edit);
+  h+=`<div class="section-label">Starter · 4 堂启动</div><div class="rowlist">`+c.starter.map((s,i)=>`<button class="lrow ${s.done?'done':''}" ${edit?`onclick="editStarter('${c.id}',${i})"`:''} style="${edit?'':'cursor:default'}">
+      <div class="wnum">${s.done?'✓':i+1}</div><div class="t"><div class="h">${esc(s.title.split('·')[1]?s.title.split('·')[1].trim():s.title)}</div>
+      <div class="s">${s.done?('已完成 '+esc(s.date||'')):'未完成'}</div></div>${edit?'<span class="chev">›</span>':''}</button>`).join("")+`</div>`;
+  let lastP="";h+=`<div class="section-label">Peach Project · 12 周</div>`;let openRows="";
+  c.weeks.forEach((w,i)=>{const ph=phase(i);
+    if(ph.tag!==lastP){if(openRows)h+=`<div class="rowlist">${openRows}</div>`;openRows="";lastP=ph.tag;h+=`<div class="section-label" style="margin-top:16px">${ph.tag}<span class="ph">${esc(ph.sub)}</span></div>`;}
+    const both=w.s1.done&&w.s2.done,k=ww(i);const lg=w.check.light?`<span class="light ${w.check.light}"></span>`:'';
+    openRows+=`<button class="lrow ${both?'done':''}" onclick="go('${edit?'cweek':'gweek'}',{cid:'${c.id}',wk:${i}})">
+      <div class="wnum">${both?'✓':'W'+(i+1)}</div><div class="t"><div class="h">Week ${i+1} ${lg}</div><div class="s">${w.goal?esc(w.goal):WO(k[0]).name+' · '+WO(k[1]).name}</div></div>
+      <div class="r"><span class="dot2 ${w.s1.done?'on':''}"></span><span class="dot2 ${w.s2.done?'on':''}"></span></div><span class="chev">›</span></button>`;});
+  if(openRows)h+=`<div class="rowlist">${openRows}</div>`;
+  h+=gradCard(c,edit);
+  if(edit)h+=`<button class="btn ghost" style="margin-top:6px" onclick="delC('${c.id}')">删除这位学员</button>`;
+  return h;
+}
+function next(c){for(let i=0;i<c.starter.length;i++)if(!c.starter[i].done)return "Starter "+(i+1);
+  for(let i=0;i<c.weeks.length;i++){const k=ww(i);if(!c.weeks[i].s1.done)return "Week "+(i+1)+" · "+WO(k[0]).name;if(!c.weeks[i].s2.done)return "Week "+(i+1)+" · "+WO(k[1]).name;}
+  if(!c.graduation.done)return "毕业记录 🎓";return "";}
+
+/* ===== WEEK DETAIL ===== */
+async function weekScreen(edit){
+  const c=await getClient(S.cid);if(!c)return render();
+  const i=S.wk,w=c.weeks[i],k=ww(i),ph=phase(i);const backTo=edit?'cclient':'gview';
+  const warm=(CFG.warmup&&CFG.warmup.length)?`<div class="card"><div class="eyebrow">🔥 热身 · Dynamic Warm-up</div><div style="font-size:13.5px">${CFG.warmup.map(x=>esc(x)).join(' · ')}</div></div>`:'';
+  const sess=(s,sIdx,woKey)=>{const wo=WO(woKey);const doneN=wo.ex.filter((_,ei)=>s.ex[ei]).length;
+    return `<div class="card"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <h3 style="font-size:16px">Session ${sIdx} · ${esc(wo.name)}</h3><span style="flex:1"></span>
+        <span class="muted" style="font-size:12px">${s.done?('✓ '+esc(s.date||'')):doneN+'/'+wo.ex.length}</span></div>
+      <div class="exlist">${wo.ex.map((e,ei)=>`<div class="ex ${s.ex[ei]?'on':''}">
+          <div class="exbox" ${edit?`onclick="toggleEx(${sIdx},${ei},this)"`:''}>${s.ex[ei]?'✓':''}</div>
+          <div class="info"><div class="en">${esc(e.n)}</div><div class="em">${esc(e.m)}</div></div>
+          ${edit?`<div class="kgin"><input id="s${sIdx}_wt${ei}" placeholder="kg" value="${esc(s.wt[ei]||'')}"></div>`:`<div class="kg">${s.wt[ei]?esc(s.wt[ei]):'—'}</div>`}
+        </div>`).join("")}</div>
+      ${edit?`<label class="chk" style="margin-top:14px"><input type="checkbox" id="s${sIdx}_done" ${s.done?'checked':''}>整堂完成</label>
+        <label class="f"><span class="lab">日期</span><input class="inp" id="s${sIdx}_date" type="date" value="${esc(s.date)}"></label>
+        <label class="f"><span class="lab">备注</span><textarea class="inp" id="s${sIdx}_notes">${esc(s.notes)}</textarea></label>`:(s.notes?`<div class="note">${esc(s.notes)}</div>`:'')}</div>`;};
+  let ci;
+  if(edit){ci=`<div class="card"><div class="eyebrow">Weekly Check-In</div>
+      <div class="r3"><label class="f"><span class="lab">体重</span><input class="inp" id="ck_w" value="${esc(w.check.weight)}"></label>
+      <label class="f"><span class="lab">腰围</span><input class="inp" id="ck_wa" value="${esc(w.check.waist)}"></label>
+      <label class="f"><span class="lab">臀围</span><input class="inp" id="ck_h" value="${esc(w.check.hip)}"></label></div>
+      <span class="lab" style="font-size:12px;font-weight:600;color:var(--soft)">状态灯</span>
+      <div class="lightpick" id="lp"><button data-l="g" class="${w.check.light==='g'?'sel':''}" onclick="pl('g')"><span class="light g"></span>Green</button>
+        <button data-l="y" class="${w.check.light==='y'?'sel':''}" onclick="pl('y')"><span class="light y"></span>Yellow</button>
+        <button data-l="r" class="${w.check.light==='r'?'sel':''}" onclick="pl('r')"><span class="light r"></span>Red</button></div></div>`;
+  }else{const has=w.check.weight||w.check.waist||w.check.hip||w.check.light;
+    ci=has?`<div class="card"><div class="eyebrow">这周的身体数据</div><div class="ci">
+      ${w.check.weight?`<span class="cichip">体重 <b>${esc(w.check.weight)}</b></span>`:''}${w.check.waist?`<span class="cichip">腰围 <b>${esc(w.check.waist)}</b></span>`:''}
+      ${w.check.hip?`<span class="cichip">臀围 <b>${esc(w.check.hip)}</b></span>`:''}${w.check.light?`<span class="cichip"><span class="light ${w.check.light}"></span> ${w.check.light==='g'?'状态很好':w.check.light==='y'?'需注意':'要跟进'}</span>`:''}</div></div>`:'';}
+  let h=`<div class="backrow"><button class="back" onclick="go('${backTo}',{cid:'${c.id}'})">‹ 返回 ${esc(c.name)}</button></div>
+    <div style="margin:2px 2px 14px"><div class="eyebrow" style="margin-bottom:4px">${ph.tag} · ${esc(ph.sub)}</div><h1 style="font-size:26px">Week ${i+1}</h1></div>`;
+  if(edit)h+=`<label class="f"><span class="lab">🎯 本周小目标</span><input class="inp" id="w_goal" value="${esc(w.goal)}"></label>`;
+  else if(w.goal)h+=`<div class="card" style="padding:14px 16px"><div style="font-family:Fraunces;color:var(--coral-ink);font-style:italic;font-size:13px">🎯 ${esc(w.goal)}</div></div>`;
+  h+=warm+ci+sess(w.s1,1,k[0])+sess(w.s2,2,k[1]);
+  if(edit)h+=`<button class="btn" onclick="saveWeek('${c.id}',${i})">保存 Week ${i+1}</button>`;
+  S._exbuf={s1:WO(k[0]).ex.map((_,ei)=>!!w.s1.ex[ei]),s2:WO(k[1]).ex.map((_,ei)=>!!w.s2.ex[ei])};S._light=w.check.light||"";
+  return h;
+}
+function toggleEx(sIdx,ei,el){S._exbuf["s"+sIdx][ei]=!S._exbuf["s"+sIdx][ei];const on=S._exbuf["s"+sIdx][ei];el.parentElement.classList.toggle('on',on);el.textContent=on?'✓':'';}
+function pl(l){S._light=l;document.querySelectorAll('#lp button').forEach(b=>b.classList.toggle('sel',b.dataset.l===l));}
+async function saveWeek(id,i){const c=await getClient(id),w=c.weeks[i],k=ww(i);
+  w.goal=v('w_goal');w.check={weight:v('ck_w'),waist:v('ck_wa'),hip:v('ck_h'),light:S._light||""};
+  [1,2].forEach(n=>{const s=w["s"+n],exdef=WO(k[n-1]).ex;s.done=document.getElementById('s'+n+'_done').checked;s.date=v('s'+n+'_date');s.notes=v('s'+n+'_notes');
+    s.ex=exdef.map((_,ei)=>(S._exbuf["s"+n]&&S._exbuf["s"+n][ei])||false);s.wt=exdef.map((_,ei)=>v('s'+n+'_wt'+ei));});
+  await saveClient(c);toast("Week "+(i+1)+" 已保存 ✓");go(S.role==="coach"?'cclient':'gview',{cid:id});}
+
+/* ===== baseline / starter / grad ===== */
+function baseCard(c,edit){const d=c.day1,st=(x,kk,u)=>`<div class="stat"><div class="v">${x?esc(x):'—'}${x?`<span style="font-size:12px">${u}</span>`:''}</div><div class="k">${kk}</div></div>`;
+  return `<div class="card"><div class="eyebrow">Day 1 · 起点</div>
+    ${d.photo?`<div class="photobox" style="margin-bottom:12px"><img src="${d.photo}"></div>`:(edit?`<div class="photo-ph" onclick="editBase('${c.id}')">＋ Day 1 照片</div>`:'')}
+    <div class="stats">${st(d.weight,'体重','kg')}${st(d.hip,'臀围','cm')}${st(d.waist,'腰围','cm')}</div>
+    ${d.goal?`<div class="note"><b>目标：</b>${esc(d.goal)}</div>`:''}${d.why&&edit?`<div class="note"><b>为什么改变：</b>${esc(d.why)}</div>`:''}
+    ${edit?`<button class="btn ghost sm" style="width:100%;margin-top:12px" onclick="editBase('${c.id}')">编辑 Day 1</button>`:''}</div>`;}
+async function editBase(id){const c=await getClient(id),d=c.day1;
+  showModal(`<h2 style="font-size:20px">Day 1 · 起点</h2>
+    <div id="phslot">${d.photo?`<div class="photobox"><img src="${d.photo}"></div><button class="smalllink" onclick="clrP('b')">移除照片</button>`:`<div class="photo-ph" id="pb">＋ 上传 Day 1 照片</div>`}</div>
+    <div class="r3" style="margin-top:12px"><label class="f"><span class="lab">体重kg</span><input class="inp" id="b_w" value="${esc(d.weight)}"></label>
+    <label class="f"><span class="lab">臀围cm</span><input class="inp" id="b_h" value="${esc(d.hip)}"></label>
+    <label class="f"><span class="lab">腰围cm</span><input class="inp" id="b_wa" value="${esc(d.waist)}"></label></div>
+    <label class="f"><span class="lab">目标</span><textarea class="inp" id="b_goal">${esc(d.goal)}</textarea></label>
+    <label class="f"><span class="lab">为什么想改变</span><textarea class="inp" id="b_why">${esc(d.why)}</textarea></label>
+    <button class="btn" onclick="saveBase('${id}')">保存</button>`);
+  S._tmp={b:d.photo||""};const pb=document.getElementById("pb");if(pb)pb.onclick=()=>pickPhoto(u=>{S._tmp.b=u;document.getElementById("phslot").innerHTML=`<div class="photobox"><img src="${u}"></div><button class="smalllink" onclick="clrP('b')">移除照片</button>`;});}
+function clrP(kk){S._tmp[kk]="";const slot=kk==='b'?'phslot':'gpslot',btn=kk==='b'?'pb':'gpb';document.getElementById(slot).innerHTML=`<div class="photo-ph" id="${btn}">＋ 上传照片</div>`;document.getElementById(btn).onclick=()=>pickPhoto(u=>{S._tmp[kk]=u;document.getElementById(slot).innerHTML=`<div class="photobox"><img src="${u}"></div><button class="smalllink" onclick="clrP('${kk}')">移除照片</button>`;});}
+async function saveBase(id){const c=await getClient(id);c.day1={photo:(S._tmp&&S._tmp.b)||"",weight:v('b_w'),hip:v('b_h'),waist:v('b_wa'),goal:v('b_goal'),why:v('b_why')};await saveClient(c);closeModal();toast("Day 1 已保存 ✓");render();}
+async function editStarter(id,i){const c=await getClient(id),s=c.starter[i];
+  showModal(`<h2 style="font-size:20px">${esc(s.title)}</h2>
+    <label class="chk"><input type="checkbox" id="st_done" ${s.done?'checked':''}>这一堂已完成</label>
+    <label class="f"><span class="lab">日期</span><input class="inp" id="st_date" type="date" value="${esc(s.date)}"></label>
+    <label class="f"><span class="lab">教练备注</span><textarea class="inp" id="st_notes">${esc(s.notes)}</textarea></label>
+    <button class="btn" onclick="saveStarter('${id}',${i})">保存</button>`);}
+async function saveStarter(id,i){const c=await getClient(id);c.starter[i]={...c.starter[i],done:document.getElementById('st_done').checked,date:v('st_date'),notes:v('st_notes')};await saveClient(c);closeModal();toast("已保存 ✓");render();}
+function gradCard(c,edit){const g=c.graduation;
+  return `<div class="section-label">Graduation · 毕业</div><div class="card" style="${g.done?'border:1px solid var(--gold)':''}">
+    ${g.done?`<div style="text-align:center"><div style="font-size:34px">🎓</div><h3 style="font-size:18px">恭喜毕业！</h3><div class="muted" style="font-size:12px">${esc(g.date)}</div></div>
+      ${g.photo?`<div class="photobox" style="margin-top:12px"><img src="${g.photo}"></div>`:''}
+      <div class="stats" style="margin-top:12px"><div class="stat"><div class="v">${g.weight?esc(g.weight):'—'}</div><div class="k">结束体重</div></div>
+      <div class="stat"><div class="v">${g.hip?esc(g.hip):'—'}</div><div class="k">结束臀围</div></div>
+      <div class="stat"><div class="v">${cmp(c)}</div><div class="k">臀围变化</div></div></div>
+      ${g.message?`<div class="note" style="margin-top:10px"><b>教练寄语：</b>${esc(g.message)}</div>`:''}`:`<p class="muted center" style="font-size:13px;padding:4px 0">完成 12 周后，在这里记录毕业成果。</p>`}
+    ${edit?`<button class="btn gold sm" style="width:100%;margin-top:12px" onclick="editGrad('${c.id}')">${g.done?'编辑毕业':'🎓 记录毕业'}</button>`:''}</div>`;}
+function cmp(c){const a=parseFloat(c.day1.hip),b=parseFloat(c.graduation.hip);if(isNaN(a)||isNaN(b))return '—';const d=(b-a).toFixed(1);return(d>0?'+':'')+d;}
+async function editGrad(id){const c=await getClient(id),g=c.graduation;
+  showModal(`<h2 style="font-size:20px">🎓 毕业记录</h2>
+    <div id="gpslot">${g.photo?`<div class="photobox"><img src="${g.photo}"></div><button class="smalllink" onclick="clrP('g')">移除照片</button>`:`<div class="photo-ph" id="gpb">＋ 上传毕业照片</div>`}</div>
+    <label class="chk" style="margin-top:12px"><input type="checkbox" id="g_done" ${g.done?'checked':''}>标记为已毕业 🎓</label>
+    <label class="f"><span class="lab">毕业日期</span><input class="inp" id="g_date" type="date" value="${esc(g.date)}"></label>
+    <div class="r3"><label class="f"><span class="lab">结束体重</span><input class="inp" id="g_w" value="${esc(g.weight)}"></label>
+    <label class="f"><span class="lab">结束臀围</span><input class="inp" id="g_h" value="${esc(g.hip)}"></label></div>
+    <label class="f"><span class="lab">教练寄语</span><textarea class="inp" id="g_msg">${esc(g.message)}</textarea></label>
+    <button class="btn gold" onclick="saveGrad('${id}')">保存</button>`);
+  S._tmp={g:g.photo||""};const b=document.getElementById("gpb");if(b)b.onclick=()=>pickPhoto(u=>{S._tmp.g=u;document.getElementById("gpslot").innerHTML=`<div class="photobox"><img src="${u}"></div><button class="smalllink" onclick="clrP('g')">移除照片</button>`;});}
+async function saveGrad(id){const c=await getClient(id);c.graduation={done:document.getElementById('g_done').checked,date:v('g_date'),weight:v('g_w'),hip:v('g_h'),photo:(S._tmp&&S._tmp.g)||"",message:v('g_msg')};await saveClient(c);closeModal();toast("毕业已保存 🎓");render();}
+async function delC(id){showModal(`<h2 style="font-size:20px">删除这位学员？</h2><p class="muted" style="font-size:12.5px;margin:4px 0 14px">会永久删除所有档案，无法复原。</p>
+  <button class="btn" style="background:#c0453a" onclick="doDel('${id}')">确定删除</button><button class="btn ghost" style="margin-top:10px" onclick="closeModal()">取消</button>`);}
+async function doDel(id){try{await db.collection(COL).doc(id).delete();}catch(e){}delete _cache[id];closeModal();toast("已删除");go('clist');}
+
+/* ===== girl pick ===== */
+async function gpickScreen(){const ix=await getIndex();const opts=ix.map(c=>`<option value="${c.id}">${esc(c.name)} · ${esc(c.code)}</option>`).join("");
+  return `<div class="hero"><div class="big">💗</div><h1>我的 Peach 护照</h1><div class="tag">Your 90-Day Journey</div></div>
+    <div class="card"><p class="muted" style="font-size:13px;margin-top:0">选你的名字，或输入教练给你的代号。你只会看到自己的旅程。</p>
+    <select class="select-client" id="pick"><option value="">— 选择我的名字 —</option>${opts}</select>
+    <div class="center muted" style="font-size:12px;margin:4px 0">或</div>
+    <label class="f"><span class="lab">专属代号</span><input class="inp" id="gcode" placeholder="PEACH01" style="text-transform:uppercase"></label>
+    <button class="btn" onclick="gEnter()">进入我的护照 🍑</button></div>
+    <p class="center muted" style="font-size:11.5px">示范：Michelle · PEACH01 已填好，可直接进去看</p>`;}
+async function gEnter(){const sel=document.getElementById("pick").value,code=document.getElementById("gcode").value.trim().toUpperCase();let id=sel;
+  if(!id&&code){const ix=await getIndex();const r=ix.find(x=>(x.code||"").toUpperCase()===code);if(r)id=r.id;}
+  if(!id){toast("选名字或输入正确代号");return;}go('gview',{cid:id});}
+
+/* ===== ADMIN ===== */
+function adminLoginScreen(){
+  return `<div class="hero"><div class="big">🔐</div><h1 style="font-size:24px">Admin 登入</h1><div class="tag">仅限管理员</div></div>
+    <div class="card"><p class="muted" style="font-size:13px;margin-top:0">输入管理密码才能修改动作、热身和提醒。</p>
+      <label class="f"><span class="lab">密码</span><input class="inp" id="adpw" type="password" placeholder="••••••" onkeydown="if(event.key==='Enter')adminLogin()"></label>
+      <button class="btn" onclick="adminLogin()">进入 Admin</button></div>`;
+}
+function adminLogin(){const pw=v('adpw');if(pw===ADMIN_PW){S.adminUnlocked=true;go('admin');}else{toast("密码错误");}}
+function adminHome(){
+  return `<div style="margin:18px 2px 14px"><div class="eyebrow" style="margin:0">Admin 后台</div><h1 style="font-size:24px">管理设定</h1>
+    <p class="muted" style="font-size:12.5px;margin-top:4px">在这里改的东西，会同步到所有教练和学员的手机。</p></div>
+    <button class="adcard" onclick="go('admin_wopick')"><span class="em">🏋️</span><div><h3>训练动作</h3><div class="s">编辑 Glute A–F 的动作与重量说明</div></div><span class="chev">›</span></button>
+    <button class="adcard" onclick="go('admin_warm')"><span class="em">🔥</span><div><h3>热身动作</h3><div class="s">Dynamic warm-up 清单</div></div><span class="chev">›</span></button>
+    <button class="adcard" onclick="go('admin_rem')"><span class="em">📣</span><div><h3>提醒 / 通知</h3><div class="s">给教练、给学员的提醒</div></div><span class="chev">›</span></button>`;
+}
+function adminWOPick(){
+  const keys=["A","B","C","D","E","F"];
+  return `<div class="backrow"><button class="back" onclick="go('admin')">‹ 返回 Admin</button></div>
+    <h1 style="font-size:22px;margin:2px 2px 12px">选一套训练</h1><div class="rowlist">`+
+    keys.map(k=>`<button class="lrow" onclick="adminEditWO('${k}')"><div class="wnum">${k}</div>
+      <div class="t"><div class="h">${esc(WO(k).name)}</div><div class="s">${WO(k).ex.length} 个动作</div></div><span class="chev">›</span></button>`).join("")+`</div>`;
+}
+function adminEditWO(k){S._woKey=k;S._woName=WO(k).name;S._wo=JSON.parse(JSON.stringify(WO(k).ex));go('admin_wo');}
+function adminWOScreen(){
+  const rows=S._wo.map((e,i)=>`<div class="exedit"><button class="delx" onclick="delEx(${i})">删除</button>
+    <input class="inp" id="ex_n${i}" placeholder="动作名字" value="${esc(e.n)}">
+    <input class="inp" id="ex_m${i}" placeholder="组数 / 重量说明" value="${esc(e.m)}"></div>`).join("");
+  return `<div class="backrow"><button class="back" onclick="go('admin_wopick')">‹ 返回</button></div>
+    <div style="margin:2px 2px 12px"><div class="eyebrow" style="margin-bottom:4px">编辑训练</div>
+    <input class="inp" id="wo_name" value="${esc(S._woName)}" style="font-family:Fraunces;font-size:18px;font-weight:600"></div>
+    ${rows}
+    <button class="btn ghost" style="margin-bottom:10px" onclick="addEx()">＋ 加一个动作</button>
+    <button class="btn" onclick="saveWO()">保存这套训练</button>`;
+}
+function syncWO(){S._woName=v('wo_name')||S._woName;S._wo=S._wo.map((e,i)=>({n:v('ex_n'+i),m:v('ex_m'+i)}));}
+function addEx(){syncWO();S._wo.push({n:"",m:""});render();}
+function delEx(i){syncWO();S._wo.splice(i,1);render();}
+async function saveWO(){syncWO();const ex=S._wo.filter(e=>e.n);CFG.workouts[S._woKey]={name:S._woName||("Glute "+S._woKey),ex};await saveCfg();toast("训练已更新 ✓，所有人同步");go('admin_wopick');}
+
+function adminWarmScreen(){
+  const rows=(CFG.warmup||[]).map((wm,i)=>`<div class="exedit"><button class="delx" onclick="delWarm(${i})">删除</button>
+    <input class="inp" id="wm_${i}" value="${esc(wm)}" placeholder="热身动作"></div>`).join("");
+  return `<div class="backrow"><button class="back" onclick="go('admin')">‹ 返回 Admin</button></div>
+    <h1 style="font-size:22px;margin:2px 2px 6px">热身动作</h1>
+    <p class="muted" style="font-size:12.5px;margin:0 2px 12px">每一周的训练详情里都会显示这些热身。</p>
+    ${rows}<button class="btn ghost" style="margin-bottom:10px" onclick="addWarm()">＋ 加一个热身</button>
+    <button class="btn" onclick="saveWarm()">保存热身</button>`;
+}
+function syncWarm(){CFG.warmup=(CFG.warmup||[]).map((_,i)=>v('wm_'+i));}
+function addWarm(){syncWarm();CFG.warmup.push("");render();}
+function delWarm(i){syncWarm();CFG.warmup.splice(i,1);render();}
+async function saveWarm(){syncWarm();CFG.warmup=CFG.warmup.filter(x=>x);await saveCfg();toast("热身已更新 ✓");go('admin');}
+
+function adminRemScreen(){
+  return `<div class="backrow"><button class="back" onclick="go('admin')">‹ 返回 Admin</button></div>
+    <h1 style="font-size:22px;margin:2px 2px 12px">提醒 / 通知</h1>
+    <div class="card"><div class="eyebrow">📣 给教练看</div>
+      <textarea class="inp" id="rem_coach" placeholder="例：本周记得帮学员做臀围测量并拍照">${esc(CFG.reminders.coach||'')}</textarea>
+      <p class="muted" style="font-size:11.5px;margin:6px 0 0">显示在教练后台顶部</p></div>
+    <div class="card"><div class="eyebrow">💌 给学员看</div>
+      <textarea class="inp" id="rem_student" placeholder="例：记得每次训练后30分钟内补充蛋白～">${esc(CFG.reminders.student||'')}</textarea>
+      <p class="muted" style="font-size:11.5px;margin:6px 0 0">显示在学员护照顶部</p></div>
+    <button class="btn" onclick="saveRem()">保存提醒</button>`;
+}
+async function saveRem(){CFG.reminders={coach:v('rem_coach'),student:v('rem_student')};await saveCfg();toast("提醒已更新 ✓");go('admin');}
+
+/* ===== modal ===== */
+function showModal(h){const d=document.createElement("div");d.id="mroot";d.style.cssText="position:fixed;inset:0;background:rgba(61,43,51,.42);backdrop-filter:blur(3px);z-index:100;display:flex;align-items:flex-end;justify-content:center";
+  d.innerHTML=`<div style="background:var(--blush);width:100%;max-width:480px;border-radius:24px 24px 0 0;max-height:92vh;overflow-y:auto;padding:20px 18px 30px">${h}</div>`;
+  d.addEventListener("click",e=>{if(e.target.id==="mroot")closeModal();});document.body.appendChild(d);}
+function closeModal(){const m=document.getElementById("mroot");if(m)m.remove();}
+
+/* ===== boot ===== */
+function setupScreen(){app.innerHTML=top()+`<div class="wrap"><div class="hero"><div class="big">🍑</div><h1>Peach Passport</h1><div class="tag">Setup</div></div>
+  <div class="card"><div class="eyebrow">还差一步</div><p style="font-size:14px;margin-top:0">这个版本用 Firebase 让所有手机同步，现在还没接上：</p>
+  <div class="note" style="color:var(--bad)"><b>${esc(FB_ERR||"未设定")}</b></div>
+  <div class="note" style="margin-top:12px">如果你已经贴了设定还看到这个，多数是 Firestore 数据库还没建、或网络挡了 Firebase。检查后重新打开。</div></div></div>`;}
+(async function(){
+  if(!FB_OK){setupScreen();return;}
+  try{await loadCfg();const ix=await getIndex();if(!ix.length)await saveClient(demo());}catch(e){toast("连不上 Firebase，检查设定/网络");}
+  render();
+})();
+</script>
+</body>
+</html>

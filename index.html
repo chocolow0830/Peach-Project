@@ -219,7 +219,7 @@ function pickPhoto(cb){const inp=document.createElement("input");inp.type="file"
 let S={role:"girl",view:"gpick",cid:null,wk:0,adminUnlocked:false};
 function setRole(r){S.role=r;S.view=r==="coach"?"clist":(r==="admin"?(S.adminUnlocked?"admin":"admin_login"):"gpick");render();}
 function go(view,d){S.view=view;if(d)Object.assign(S,d);window.scrollTo(0,0);render();}
-function top(){return `<div class="top"><span class="brand">🍑 Peach Passport</span><span class="sp"></span>
+function navbar(){return `<div class="top"><span class="brand">🍑 Peach Passport</span><span class="sp"></span>
   <div class="seg"><button class="${S.role==='girl'?'on':''}" onclick="setRole('girl')">👀 学员</button>
   <button class="${S.role==='coach'?'on':''}" onclick="setRole('coach')">🧑‍🏫 教练</button>
   <button class="${S.role==='admin'?'on':''}" onclick="setRole('admin')">🛠</button></div></div>`;}
@@ -234,7 +234,7 @@ async function render(){let h="";
   }else{
     if(S.view==="gweek")h=await weekScreen(false);else if(S.view==="gview")h=await clientScreen(false);else h=await gpickScreen();
   }
-  app.innerHTML=top()+`<div class="wrap">${h}</div>`;
+  app.innerHTML=navbar()+`<div class="wrap">${h}</div>`;
   if(S._after){const f=S._after;S._after=null;f();}
 }
 
@@ -481,16 +481,16 @@ function showModal(h){const d=document.createElement("div");d.id="mroot";d.style
 function closeModal(){const m=document.getElementById("mroot");if(m)m.remove();}
 
 /* ===== boot ===== */
-function setupScreen(){app.innerHTML=top()+`<div class="wrap"><div class="hero"><div class="big">🍑</div><h1>Peach Passport</h1><div class="tag">Setup</div></div>
+function setupScreen(){app.innerHTML=navbar()+`<div class="wrap"><div class="hero"><div class="big">🍑</div><h1>Peach Passport</h1><div class="tag">Setup</div></div>
   <div class="card"><div class="eyebrow">还差一步</div><p style="font-size:14px;margin-top:0">这个版本用 Firebase 让所有手机同步，现在还没接上：</p>
   <div class="note" style="color:var(--bad)"><b>${esc(FB_ERR||"未设定")}</b></div>
   <div class="note" style="margin-top:12px">如果你已经贴了设定还看到这个，多数是 Firestore 数据库还没建、或网络挡了 Firebase。检查后重新打开。</div></div></div>`;}
 (async function(){
   if(!FB_OK){setupScreen();return;}
-  app.innerHTML=top()+`<div class="wrap"><div class="hero"><div class="big">🍑</div><h1>Peach Passport</h1><div class="tag">载入中…</div></div></div>`;
-  const guard=setTimeout(()=>{app.innerHTML=top()+`<div class="wrap"><div class="card"><div class="eyebrow" style="color:var(--bad)">连不上数据库</div><p style="font-size:13.5px;margin:0 0 8px">页面开好了，但连不到 Firestore。多数是这两个原因：</p><ol style="font-size:13px;color:var(--soft);padding-left:20px;line-height:1.7"><li>Firestore Database 还没建立（Firebase Console → Build → Firestore Database → Create）</li><li>规则没开放读写（Rules 分页贴上规则并 Publish）</li></ol></div></div>`;},8000);
+  app.innerHTML=navbar()+`<div class="wrap"><div class="hero"><div class="big">🍑</div><h1>Peach Passport</h1><div class="tag">载入中…</div></div></div>`;
+  const guard=setTimeout(()=>{app.innerHTML=navbar()+`<div class="wrap"><div class="card"><div class="eyebrow" style="color:var(--bad)">连不上数据库</div><p style="font-size:13.5px;margin:0 0 8px">页面开好了，但连不到 Firestore。多数是这两个原因：</p><ol style="font-size:13px;color:var(--soft);padding-left:20px;line-height:1.7"><li>Firestore Database 还没建立（Firebase Console → Build → Firestore Database → Create）</li><li>规则没开放读写（Rules 分页贴上规则并 Publish）</li></ol></div></div>`;},8000);
   try{await loadCfg();const ix=await getIndex();if(!ix.length)await saveClient(demo());clearTimeout(guard);render();}
-  catch(e){clearTimeout(guard);app.innerHTML=top()+`<div class="wrap"><div class="card"><div class="eyebrow" style="color:var(--bad)">连不上数据库</div><p style="font-size:13.5px;margin:0">Firestore 报错：${esc((e&&e.message)||e)}。<br><br>请确认 Firestore Database 已建立、规则已开放读写。</p></div></div>`;}
+  catch(e){clearTimeout(guard);app.innerHTML=navbar()+`<div class="wrap"><div class="card"><div class="eyebrow" style="color:var(--bad)">连不上数据库</div><p style="font-size:13.5px;margin:0">Firestore 报错：${esc((e&&e.message)||e)}。<br><br>请确认 Firestore Database 已建立、规则已开放读写。</p></div></div>`;}
 })();
 </script>
 </body>

@@ -101,6 +101,22 @@ textarea.inp{min-height:52px;resize:vertical}
 .sesscard{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px;margin-bottom:12px;width:100%;text-align:left;display:block}
 .sesscard .hd{display:flex;align-items:center;gap:8px;margin-bottom:4px}
 .sesscard h3{font-size:16px}
+.exhead{display:flex;align-items:center;gap:8px;font-size:15px}
+.exhead b{font-weight:600}
+.wttag{font-size:10px;font-weight:700;color:#8a6a35;background:var(--gold-soft,#EFDCBE);padding:2px 7px;border-radius:10px;text-transform:uppercase;letter-spacing:.03em}
+.extip{font-size:12px;color:var(--soft);background:var(--blush);border-radius:10px;padding:8px 10px;margin:8px 0 4px;line-height:1.45}
+.setwrap{margin-top:6px}
+.setrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.setrow:last-child{border-bottom:none}
+.setnum{width:26px;height:26px;border-radius:50%;flex:none;display:grid;place-items:center;font-family:'Fraunces';font-weight:600;font-size:13px;background:var(--pill);color:var(--soft)}
+.setrow.on .setnum{background:var(--coral);color:#fff}
+.setcell{flex:1;display:flex;align-items:center;gap:6px}
+.setcell .cl{font-size:10px;color:var(--soft);text-transform:uppercase;font-weight:700}
+.setcell input{width:100%;padding:10px 8px;font-size:15px;border:1px solid var(--line);border-radius:10px;text-align:center;background:#FFFDFC}
+.setcell.ro{font-family:'Fraunces';font-weight:600;font-size:14px;color:var(--plum);justify-content:center}
+.setchk{flex:none;display:grid;place-items:center}
+.setchk input{width:26px;height:26px;accent-color:var(--coral)}
+.setchk.ro{width:26px;height:26px;border-radius:50%;font-size:14px;color:var(--ok)}
 </style>
 </head>
 <body>
@@ -124,7 +140,7 @@ const COL="peach_clients", CFGID="__config";
 const ADMIN_EMAIL="admin", ADMIN_PW="pp930830";
 let db=null,FB_OK=false,FB_ERR="";
 try{
-  if(firebaseConfig.apiKey && typeof firebase!=="undefined"){firebase.initializeApp(firebaseConfig);db=firebase.firestore();FB_OK=true;}
+  if(firebaseConfig.apiKey && typeof firebase!=="undefined"){firebase.initializeApp(firebaseConfig);db=firebase.firestore();try{db.enablePersistence({synchronizeTabs:true}).catch(function(){});}catch(e){}FB_OK=true;}
   else if(typeof firebase==="undefined"){FB_ERR="Firebase not loaded";}
 }catch(e){FB_ERR=(e&&e.message)||"init failed";}
 
@@ -171,7 +187,11 @@ const L={
   remCoachPh:{zh:"例：本周记得帮学员做臀围测量并拍照",en:"e.g. Remember hip measurement + photo this week"},remStuPh:{zh:"例：记得每次训练后30分钟内补充蛋白～",en:"e.g. Take protein within 30 min after each session~"},
   toCoach:{zh:"📣 给教练：",en:"📣 For coaches: "},toStudent:{zh:"💌 提醒：",en:"💌 Reminder: "},
   loadErr:{zh:"连不上数据库，检查 Firestore 是否已建立、规则是否开放。",en:"Can't reach the database. Check Firestore is created and rules are open."},
-  loading:{zh:"载入中…",en:"Loading…"}
+  loading:{zh:"载入中…",en:"Loading…"},
+  setsWord:{zh:"组",en:"×"},setsWordFull:{zh:"组数",en:"Sets"},repsWord:{zh:"次",en:"reps"},
+  perHand:{zh:"单个重",en:"per hand"},wtType:{zh:"重量类型",en:"Weight type"},
+  wtTotal:{zh:"总重（含杠铃/器械）",en:"Total (incl. bar)"},wtPer:{zh:"单手 / 每只哑铃",en:"Per hand / dumbbell"},wtBody:{zh:"徒手（无重量）",en:"Bodyweight"},
+  tipWord:{zh:"小贴士",en:"Tip"},targetReps:{zh:"目标次数",en:"Target reps"},bodyOnly:{zh:"徒手",en:"Bodyweight"}
 };
 function t(k){const o=L[k];return o?(o[lang]||o.zh):k;}
 
@@ -179,15 +199,49 @@ function t(k){const o=L[k];return o?(o[lang]||o.zh):k;}
 const DEFAULT_CFG={id:CFGID,warmup:["Dynamic mobility"],reminders:{coach:"",student:""},
   coaches:[{name:"Zeta (demo)",email:"zeta@demo.com",password:"123456"}],
   workouts:{
-    A:{name:"Glute A",ex:[{n:"Hip Thrust",m:"4×8–10 · 空杆→5kg/边→7.5kg/边 ×2"},{n:"Romanian Deadlift",m:"3×10 · 5kg ×2→7.5kg (视情况)"},{n:"Lunges (glute-focused)",m:"徒手→2.5kg/边→5kg/边 (视情况)"},{n:"Cable Kickback",m:"3×15 · 5kg→7.5kg ×2"},{n:"Hip Abductor",m:"3×20 · 5kg→10kg→15kg"}]},
-    B:{name:"Glute B",ex:[{n:"Hip Thrust",m:"4×8–10 · 空杆→5kg/边→7.5kg/边 ×2"},{n:"Romanian Deadlift",m:"3×10 · 5kg ×2→7.5kg (视情况)"},{n:"Hamstring Curl",m:"3×10–15 · 从最轻开始，逐步加"},{n:"Hip Abductor",m:"3×20 · 5kg→10kg→15kg"},{n:"Plank",m:"3组 · 每组30秒 (视情况)"}]},
-    C:{name:"Glute C",ex:[{n:"Hip Thrust",m:"4×8–10 · 空杆→5kg/边→7.5kg/边 ×2"},{n:"Stiff Leg Deadlift",m:"3×10 · 空杆学动作，之后比RDL −15% (视情况)"},{n:"Smith Machine Lunges (glute)",m:"徒手→2.5kg/边→5kg/边 (视情况)"},{n:"Cable Pull Through",m:"3×15 · 10kg→15kg→…"},{n:"Glute Extension",m:"3×20 · 徒手→5kg→10kg (视情况)"}]},
-    D:{name:"Glute D",ex:[{n:"Smith Machine Sumo Squat",m:"4×8–10 · 空杆→2.5kg/边→5kg/边 ×2 (视情况)"},{n:"Bulgarian Split Squat",m:"3×10 · 沿用之前进度"},{n:"Hamstring Curl",m:"3组 · 沿用之前进度"},{n:"Cable Kickback",m:"3×12–15 (可加重到10次) · 沿用之前进度"},{n:"Hip Abduction",m:"3组 · 沿用之前进度"}]},
-    E:{name:"Glute E",ex:[{n:"Hip Thrust",m:"4×8–10 · 沿用之前进度"},{n:"Romanian Deadlift",m:"3×10 · 沿用之前进度"},{n:"Lunges (glute-focused)",m:"沿用之前进度"},{n:"Cable Kickback",m:"3×15 · 沿用之前进度"},{n:"Hip Abductor",m:"3×20 · 沿用之前进度"}]},
-    F:{name:"Glute F",ex:[{n:"Squat",m:"4×8–10 · 沿用之前进度"},{n:"Walking Lunges (大步幅·夹臀)",m:"沿用之前进度"},{n:"Cable Pull Through",m:"3×15 · 沿用之前进度"},{n:"Hip Abductor",m:"3×20 · 沿用之前进度"},{n:"Side Plank",m:"3组 · 每边"}]},
+    A:{name:"Glute A",ex:[
+      {n:"Hip Thrust",sets:4,reps:"8-10",wt:"total",note:"空杆→5→7.5kg/边 ×2"},
+      {n:"Romanian Deadlift",sets:3,reps:"10",wt:"total",note:"5kg×2→7.5kg"},
+      {n:"Lunges (glute-focused)",sets:3,reps:"10-12",wt:"per",note:"徒手→2.5→5kg/边"},
+      {n:"Cable Kickback",sets:3,reps:"15",wt:"total",note:"5→7.5kg"},
+      {n:"Hip Abductor",sets:3,reps:"20",wt:"total",note:"5→10→15kg"}]},
+    B:{name:"Glute B",ex:[
+      {n:"Hip Thrust",sets:4,reps:"8-10",wt:"total",note:"空杆→5→7.5kg/边 ×2"},
+      {n:"Romanian Deadlift",sets:3,reps:"10",wt:"total",note:"5kg×2→7.5kg"},
+      {n:"Hamstring Curl",sets:3,reps:"10-15",wt:"total",note:"从最轻开始逐步加"},
+      {n:"Hip Abductor",sets:3,reps:"20",wt:"total",note:"5→10→15kg"},
+      {n:"Plank",sets:3,reps:"30s",wt:"body",note:"每组30秒"}]},
+    C:{name:"Glute C",ex:[
+      {n:"Hip Thrust",sets:4,reps:"8-10",wt:"total",note:"空杆→5→7.5kg/边 ×2"},
+      {n:"Stiff Leg Deadlift",sets:3,reps:"10",wt:"total",note:"空杆学动作，比RDL −15%"},
+      {n:"Smith Machine Lunges",sets:3,reps:"10-12",wt:"per",note:"徒手→2.5→5kg/边"},
+      {n:"Cable Pull Through",sets:3,reps:"15",wt:"total",note:"10→15kg"},
+      {n:"Glute Extension",sets:3,reps:"20",wt:"total",note:"徒手→5→10kg"}]},
+    D:{name:"Glute D",ex:[
+      {n:"Smith Machine Sumo Squat",sets:4,reps:"8-10",wt:"total",note:"空杆→2.5→5kg/边 ×2"},
+      {n:"Bulgarian Split Squat",sets:3,reps:"10",wt:"per",note:"沿用之前进度"},
+      {n:"Hamstring Curl",sets:3,reps:"10-15",wt:"total",note:"沿用之前进度"},
+      {n:"Cable Kickback",sets:3,reps:"12-15",wt:"total",note:"沿用之前进度"},
+      {n:"Hip Abduction",sets:3,reps:"20",wt:"total",note:"沿用之前进度"}]},
+    E:{name:"Glute E",ex:[
+      {n:"Hip Thrust",sets:4,reps:"8-10",wt:"total",note:"沿用之前进度"},
+      {n:"Romanian Deadlift",sets:3,reps:"10",wt:"total",note:"沿用之前进度"},
+      {n:"Lunges (glute-focused)",sets:3,reps:"10-12",wt:"per",note:"沿用之前进度"},
+      {n:"Cable Kickback",sets:3,reps:"15",wt:"total",note:"沿用之前进度"},
+      {n:"Hip Abductor",sets:3,reps:"20",wt:"total",note:"沿用之前进度"}]},
+    F:{name:"Glute F",ex:[
+      {n:"Squat",sets:4,reps:"8-10",wt:"total",note:"沿用之前进度"},
+      {n:"Walking Lunges",sets:3,reps:"12",wt:"per",note:"大步幅·夹臀"},
+      {n:"Cable Pull Through",sets:3,reps:"15",wt:"total",note:"沿用之前进度"},
+      {n:"Hip Abductor",sets:3,reps:"20",wt:"total",note:"沿用之前进度"},
+      {n:"Side Plank",sets:3,reps:"30s",wt:"body",note:"每边"}]},
   }};
 let CFG=JSON.parse(JSON.stringify(DEFAULT_CFG));
 function WO(k){return (CFG.workouts&&CFG.workouts[k])||{name:k,ex:[]};}
+function exSets(def){return Math.max(1,parseInt(def.sets)||3);}
+function sessRows(s,ei,def){const n=exSets(def);const log=(s.log&&s.log[ei]&&s.log[ei].rows)||[];const r=[];for(let i=0;i<n;i++)r.push(log[i]||{kg:"",reps:"",done:false});return r;}
+function sessCount(wo,s){let d=0,t=0;wo.ex.forEach((e,ei)=>{sessRows(s,ei,e).forEach(r=>{t++;if(r.done)d++;});});return{d,t};}
+function wtTag(w){return w==='per'?t('perHand'):'';}
 function ww(i){return i<4?["A","B"]:i<8?["C","D"]:["E","F"];}
 function phase(i){return i<4?{tag:"Foundation",sub:{zh:"W1–4 · RPE 6–7 打技术",en:"W1–4 · RPE 6–7 technique"}}:i<8?{tag:"Overload",sub:{zh:"W5–8 · RPE 7–8 加重",en:"W5–8 · RPE 7–8 add load"}}:{tag:"High Intensity",sub:{zh:"W9–12 · RPE 8–9 冲成长",en:"W9–12 · RPE 8–9 max growth"}};}
 function phSub(i){const s=phase(i).sub;return s[lang]||s.zh;}
@@ -203,7 +257,7 @@ async function loadCfg(){try{const s=await db.collection(COL).doc(CFGID).get();
 async function saveCfg(){CFG.id=CFGID;try{await db.collection(COL).doc(CFGID).set(CFG);}catch(e){toast("保存失败/save failed");}}
 
 /* ===== factory ===== */
-function blankS(){return{done:false,date:"",ex:[],wt:[],notes:""};}
+function blankS(){return{done:false,date:"",notes:"",log:[]};}
 function newClient(o){const weeks=[];for(let w=0;w<12;w++)weeks.push({goal:"",check:{weight:"",waist:"",hip:"",light:""},s1:blankS(),s2:blankS()});
   const titles=["Discover","Activate","Believe","Commit"];
   return{id:"c"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),name:o.name,code:o.code,email:(o.email||"").toLowerCase(),password:o.password||"",coach:o.coach||"",coachEmail:(o.coachEmail||"").toLowerCase(),
@@ -212,8 +266,10 @@ function newClient(o){const weeks=[];for(let w=0;w<12;w++)weeks.push({goal:"",ch
 function demo(){const c=newClient({name:"Michelle (demo)",code:"PEACH01",email:"michelle@demo.com",password:"123456",coach:"Zeta",coachEmail:"zeta@demo.com"});
   c.day1={photo:"",weight:"58",hip:"92",waist:"71",goal:"想穿回旧牛仔裤、拍照有 shape / Fit into old jeans",why:"生完宝宝后想找回自信 / Regain confidence after baby"};
   c.starter.forEach((s,i)=>{s.done=true;s.date="2026-06-0"+(i+2);});
-  const kg=[["空杆","5kg","徒手","5kg","10kg"],["5kg/边","5kg","2.5kg/边","7.5kg","10kg"]];
-  for(let w=0;w<3;w++){const k=c.weeks[w];k.goal=["学会 Hip Thrust 发力","稳定 RDL","加重 Cable Kickback"][w];k.check={weight:(58-w*0.3).toFixed(1),waist:(71-w)+"",hip:(92+w*0.4).toFixed(1),light:w<2?"g":"y"};[k.s1,k.s2].forEach((s,si)=>{s.done=true;s.date="2026-06-"+(10+w*3+si);s.ex=[true,true,true,true,true];s.wt=kg[si].slice();});}
+  const demoKg=["20","30","5","7.5","10"];
+  for(let w=0;w<3;w++){const k=c.weeks[w];k.goal=["学会 Hip Thrust 发力","稳定 RDL","加重 Cable Kickback"][w];k.check={weight:(58-w*0.3).toFixed(1),waist:(71-w)+"",hip:(92+w*0.4).toFixed(1),light:w<2?"g":"y"};
+    [1,2].forEach((n,si)=>{const s=k['s'+n];const wo=WO(ww(w)[si]);s.done=true;s.date="2026-06-"+(10+w*3+si);
+      s.log=wo.ex.map((e,ei)=>({rows:Array.from({length:exSets(e)}).map(()=>({kg:e.wt==='body'?'':demoKg[ei%demoKg.length],reps:(""+e.reps).replace(/-.*/,''),done:true}))}));});}
   return c;}
 
 function prog(c){let d=0,t=0;c.starter.forEach(s=>{t++;if(s.done)d++;});c.weeks.forEach(w=>{t+=2;if(w.s1.done)d++;if(w.s2.done)d++;});t++;if(c.graduation.done)d++;return{done:d,total:t,pct:t?Math.round(d/t*100):0};}
@@ -231,7 +287,7 @@ function getSess(){try{return JSON.parse(localStorage.getItem('pp:sess')||'null'
 function setSess(s){SESS=s;try{localStorage.setItem('pp:sess',JSON.stringify(s));}catch(e){}}
 function clearSess(){SESS=null;try{localStorage.removeItem('pp:sess');}catch(e){}}
 let SESS=getSess();
-let S={view:"",cid:null,wk:0};
+let S={view:"",cid:null,wk:0,sn:1};
 function go(view,d){S.view=view;if(d)Object.assign(S,d);window.scrollTo(0,0);render();}
 async function doLogin(){
   const email=v('lg_email').toLowerCase(),pw=v('lg_pw');
@@ -261,10 +317,10 @@ async function render(){
     else if(S.view==="admin_warm")h=adminWarmScreen();else if(S.view==="admin_rem")h=adminRemScreen();
     else if(S.view==="admin_coach")h=adminCoachScreen();else h=adminHome();
   }else if(SESS.role==='coach'){
-    if(S.view==="cweek")h=await weekScreen(true);else if(S.view==="cclient")h=await clientScreen(true);else h=await listScreen();
+    if(S.view==="csession")h=await sessionScreen(true);else if(S.view==="cweek")h=await weekScreen(true);else if(S.view==="cclient")h=await clientScreen(true);else h=await listScreen();
   }else{ // student
     S.cid=SESS.clientId;
-    if(S.view==="gweek")h=await weekScreen(false);else h=await clientScreen(false);
+    if(S.view==="gsession")h=await sessionScreen(false);else if(S.view==="gweek")h=await weekScreen(false);else h=await clientScreen(false);
   }
   app.innerHTML=navbar()+`<div class="wrap">${h}</div>`;
   if(S._after){const f=S._after;S._after=null;f();}
@@ -358,15 +414,10 @@ async function weekScreen(edit){
       ${w.goal?`<div style="font-family:Fraunces;color:var(--coral-ink);font-style:italic;font-size:13px;margin-bottom:6px">🎯 ${esc(w.goal)}</div>`:''}
       <div class="ci">${w.check.weight?`<span class="cichip">${t('weight')} <b>${esc(w.check.weight)}</b></span>`:''}${w.check.waist?`<span class="cichip">${t('waist')} <b>${esc(w.check.waist)}</b></span>`:''}${w.check.hip?`<span class="cichip">${t('hip')} <b>${esc(w.check.hip)}</b></span>`:''}${w.check.light?`<span class="cichip"><span class="light ${w.check.light}"></span> ${w.check.light==='g'?t('good'):w.check.light==='y'?t('watch'):t('followup')}</span>`:''}</div></div>`:'';}
   // session cards
-  const sCard=(s,n,key)=>{const wo=WO(key);const dn=wo.ex.filter((_,ei)=>s.ex[ei]).length;
-    if(edit){return `<button class="sesscard" onclick="editSession('${c.id}',${i},${n})">
-        <div class="hd"><h3>${t('session')} ${n} · ${esc(wo.name)}</h3><span style="flex:1"></span><span class="muted" style="font-size:12px">${s.done?'✓ '+esc(s.date||''):dn+'/'+wo.ex.length+' ›'}</span></div>
-        <div class="muted" style="font-size:12px">${wo.ex.map(e=>esc(e.n)).join(' · ')}</div></button>`;}
-    return `<div class="sesscard"><div class="hd"><h3>${t('session')} ${n} · ${esc(wo.name)}</h3><span style="flex:1"></span><span class="muted" style="font-size:12px">${s.done?'✓ '+esc(s.date||''):dn+'/'+wo.ex.length}</span></div>
-      <div class="exlist">${wo.ex.map((e,ei)=>`<div class="ex ${s.ex[ei]?'on':''}"><div class="exbox">${s.ex[ei]?'✓':''}</div>
-        <div class="info"><div class="en">${esc(e.n)}</div><div class="em">${esc(e.m)}</div></div>
-        <div class="kg">${s.wt[ei]?esc(s.wt[ei]):'—'}</div></div>`).join("")}</div>
-      ${s.notes?`<div class="note">${esc(s.notes)}</div>`:''}</div>`;};
+  const sCard=(s,n,key)=>{const wo=WO(key);const cnt=sessCount(wo,s);const tgt=edit?'csession':'gsession';
+    return `<button class="sesscard" onclick="go('${tgt}',{cid:'${c.id}',wk:${i},sn:${n}})">
+      <div class="hd"><h3>${t('session')} ${n} · ${esc(wo.name)}</h3><span style="flex:1"></span><span class="muted" style="font-size:12px">${s.done?'✓ '+esc(s.date||''):cnt.d+'/'+cnt.t}</span><span class="chev" style="color:var(--peach);font-size:18px">›</span></div>
+      <div class="muted" style="font-size:12px">${wo.ex.map(e=>esc(e.n)+' '+exSets(e)+t('setsWord')).join(' · ')}</div></button>`;};
   return `<div><button class="backbtn" onclick="go('${backTo}',{cid:'${c.id}'})">‹ ${esc(c.name)}</button></div>
     <div style="margin:6px 2px 14px"><div class="eyebrow" style="margin-bottom:4px">${ph.tag} · ${esc(phSub(i))}</div><h1 style="font-size:26px">${t('week')} ${i+1}</h1></div>
     ${warm}${ciCard}${sCard(w.s1,1,k[0])}${sCard(w.s2,2,k[1])}`;
@@ -385,22 +436,46 @@ async function editMeta(id,i){const c=await getClient(id),w=c.weeks[i];S._light=
     <button class="btn" style="margin-top:10px" onclick="saveMeta('${id}',${i})">${t('save')}</button>`);}
 function pl(l){S._light=l;document.querySelectorAll('#lp button').forEach(b=>b.classList.toggle('sel',b.dataset.l===l));}
 async function saveMeta(id,i){const c=await getClient(id),w=c.weeks[i];w.goal=v('w_goal');w.check={weight:v('ck_w'),waist:v('ck_wa'),hip:v('ck_h'),light:S._light||""};await saveClient(c);closeModal();toast(t('saved'));render();}
-async function editSession(id,i,n){const c=await getClient(id),w=c.weeks[i],key=ww(i)[n-1],wo=WO(key),s=w['s'+n];
-  S._exbuf=wo.ex.map((_,ei)=>!!s.ex[ei]);
-  showModal(`<h2 style="font-size:20px">${t('session')} ${n} · ${esc(wo.name)}</h2>
-    <div class="exlist" style="margin:8px 0 4px">${wo.ex.map((e,ei)=>`<div class="ex ${s.ex[ei]?'on':''}">
-      <div class="exbox" onclick="tEx(${ei},this)">${s.ex[ei]?'✓':''}</div>
-      <div class="info"><div class="en">${esc(e.n)}</div><div class="em">${esc(e.m)}</div></div>
-      <div class="kgin"><input id="sx_wt${ei}" placeholder="kg" value="${esc(s.wt[ei]||'')}"></div></div>`).join("")}</div>
-    <label class="chk" style="margin-top:12px"><input type="checkbox" id="sx_done" ${s.done?'checked':''}>${t('wholeDone')}</label>
+async function sessionScreen(edit){
+  const c=await getClient(S.cid);if(!c)return render();
+  const i=S.wk,n=S.sn,w=c.weeks[i],key=ww(i)[n-1],wo=WO(key),s=w['s'+n];
+  const backTo=edit?'cweek':'gweek';
+  let exHtml=wo.ex.map((e,ei)=>{
+    const rows=sessRows(s,ei,e);const tag=e.wt==='per'?`<span class="wttag">${t('perHand')}</span>`:'';
+    const body=e.wt==='body';
+    const rowHtml=rows.map((r,si)=>{
+      if(edit){return `<div class="setrow">
+        <div class="setnum">${si+1}</div>
+        ${body?`<div class="setcell muted" style="flex:1;font-size:12px">${t('bodyOnly')}</div>`:`<div class="setcell"><span class="cl">kg</span><input id="e${ei}_s${si}_kg" inputmode="decimal" value="${esc(r.kg)}"></div>`}
+        <div class="setcell"><span class="cl">${t('repsWord')}</span><input id="e${ei}_s${si}_reps" inputmode="numeric" placeholder="${esc(e.reps)}" value="${esc(r.reps)}"></div>
+        <label class="setchk"><input type="checkbox" id="e${ei}_s${si}_done" ${r.done?'checked':''}></label></div>`;}
+      return `<div class="setrow ${r.done?'on':''}">
+        <div class="setnum">${si+1}</div>
+        <div class="setcell ro">${body?'—':(r.kg?esc(r.kg)+'kg':'—')}</div>
+        <div class="setcell ro">${r.reps?esc(r.reps)+' '+t('repsWord'):'—'}</div>
+        <div class="setchk ro">${r.done?'✓':'○'}</div></div>`;
+    }).join("");
+    return `<div class="card"><div class="exhead"><b>${esc(e.n)}</b> ${tag}<span style="flex:1"></span><span class="muted" style="font-size:11.5px">${exSets(e)}${t('setsWord')} × ${esc(e.reps)}</span></div>
+      ${e.note?`<div class="extip">💡 ${esc(e.note)}</div>`:''}
+      <div class="setwrap">${rowHtml}</div></div>`;
+  }).join("");
+  let foot="";
+  if(edit){foot=`<label class="chk" style="margin-top:6px"><input type="checkbox" id="sx_done" ${s.done?'checked':''}>${t('wholeDone')}</label>
     <label class="f"><span class="lab">${t('date')}</span><input class="inp" id="sx_date" type="date" value="${esc(s.date)}"></label>
     <label class="f"><span class="lab">${t('notes')}</span><textarea class="inp" id="sx_notes">${esc(s.notes)}</textarea></label>
-    <button class="btn" onclick="saveSession('${id}',${i},${n})">${t('save')}</button>`);}
-function tEx(ei,el){S._exbuf[ei]=!S._exbuf[ei];el.parentElement.classList.toggle('on',S._exbuf[ei]);el.textContent=S._exbuf[ei]?'✓':'';}
+    <button class="btn" onclick="saveSession('${c.id}',${i},${n})">${t('save')}</button>`;}
+  else if(s.notes){foot=`<div class="note">${esc(s.notes)}</div>`;}
+  return `<div><button class="backbtn" onclick="go('${backTo}',{cid:'${c.id}',wk:${i}})">‹ ${t('week')} ${i+1}</button></div>
+    <div style="margin:6px 2px 14px"><div class="eyebrow" style="margin-bottom:4px">${t('session')} ${n} · ${s.date?esc(s.date):''}</div><h1 style="font-size:24px">${esc(wo.name)}</h1></div>
+    ${exHtml}${foot}`;
+}
 async function saveSession(id,i,n){const c=await getClient(id),w=c.weeks[i],key=ww(i)[n-1],wo=WO(key),s=w['s'+n];
-  s.done=document.getElementById('sx_done').checked;s.date=v('sx_date');s.notes=v('sx_notes');
-  s.ex=wo.ex.map((_,ei)=>S._exbuf[ei]||false);s.wt=wo.ex.map((_,ei)=>v('sx_wt'+ei));
-  await saveClient(c);closeModal();toast(t('saved'));render();}
+  const log=wo.ex.map((e,ei)=>({rows:Array.from({length:exSets(e)}).map((_,si)=>({
+    kg:v(`e${ei}_s${si}_kg`),reps:v(`e${ei}_s${si}_reps`),done:!!(document.getElementById(`e${ei}_s${si}_done`)&&document.getElementById(`e${ei}_s${si}_done`).checked)}))}));
+  s.log=log;s.date=v('sx_date');s.notes=v('sx_notes');
+  const cnt=sessCount(wo,s);const manual=document.getElementById('sx_done').checked;
+  s.done=manual||(cnt.t>0&&cnt.d===cnt.t);
+  await saveClient(c);toast(t('saved'));go(SESS.role==='coach'?'cweek':'gweek',{cid:id,wk:i});}
 
 /* ===== baseline / starter / grad ===== */
 function baseCard(c,edit){const d=c.day1,st=(x,kk,u)=>`<div class="stat"><div class="v">${x?esc(x):'—'}${x?`<span style="font-size:12px">${u}</span>`:''}</div><div class="k">${kk}</div></div>`;
@@ -485,20 +560,28 @@ function adminWOPick(){const keys=["A","B","C","D","E","F"];
     keys.map(k=>`<button class="lrow" onclick="adminEditWO('${k}')"><div class="wnum">${k}</div><div class="t"><div class="h">${esc(WO(k).name)}</div><div class="s">${WO(k).ex.length} ${t('exercises')}</div></div><span class="chev">›</span></button>`).join("")+`</div>`;}
 function adminEditWO(k){S._woKey=k;S._woName=WO(k).name;S._wo=JSON.parse(JSON.stringify(WO(k).ex));go('admin_wo');}
 function adminWOScreen(){
-  const rows=S._wo.map((e,i)=>`<button class="exedit" onclick="editExPop(${i})"><div class="info"><div class="en">${esc(e.n)||'—'}</div><div class="em">${esc(e.m)}</div></div><span class="chev">›</span></button>`).join("");
+  const rows=S._wo.map((e,i)=>`<button class="exedit" onclick="editExPop(${i})"><div class="info"><div class="en">${esc(e.n)||'—'}</div><div class="em">${exSets(e)}${t('setsWord')} × ${esc(e.reps||'')} · ${e.wt==='per'?t('perHand'):e.wt==='body'?t('wtBody'):t('wtTotal')}</div></div><span class="chev">›</span></button>`).join("");
   return `<button class="backbtn" onclick="go('admin_wopick')">‹ ${t('back')}</button>
     <div style="margin:6px 2px 12px"><div class="eyebrow" style="margin-bottom:4px">${t('editWO')}</div>
     <input class="inp" id="wo_name" value="${esc(S._woName)}" style="font-family:Fraunces;font-size:18px;font-weight:600" onchange="S._woName=this.value"></div>
     ${rows}
     <button class="btn ghost" style="margin:4px 0 10px" onclick="editExPop(-1)">${t('addEx')}</button>
     <button class="btn" onclick="saveWO()">${t('save')}</button>`;}
-function editExPop(i){const e=i>=0?S._wo[i]:{n:"",m:""};
+function editExPop(i){const e=i>=0?S._wo[i]:{n:"",sets:3,reps:"10",wt:"total",note:""};
   showModal(`<h2 style="font-size:20px">${i>=0?t('editWO'):t('addEx').replace('＋ ','')}</h2>
     <label class="f"><span class="lab">${t('exName')}</span><input class="inp" id="ex_n" value="${esc(e.n)}" placeholder="Hip Thrust"></label>
-    <label class="f"><span class="lab">${t('exPresc')}</span><input class="inp" id="ex_m" value="${esc(e.m)}" placeholder="4×8–10 · 空杆→5kg…"></label>
+    <div class="r3"><label class="f"><span class="lab">${t('setsWordFull')}</span><input class="inp" id="ex_sets" inputmode="numeric" value="${esc(e.sets||3)}"></label>
+      <label class="f"><span class="lab">${t('targetReps')}</span><input class="inp" id="ex_reps" value="${esc(e.reps||'')}" placeholder="8-10"></label></div>
+    <label class="f"><span class="lab">${t('wtType')}</span><select class="inp" id="ex_wt">
+      <option value="total" ${e.wt==='total'?'selected':''}>${t('wtTotal')}</option>
+      <option value="per" ${e.wt==='per'?'selected':''}>${t('wtPer')}</option>
+      <option value="body" ${e.wt==='body'?'selected':''}>${t('wtBody')}</option></select></label>
+    <label class="f"><span class="lab">💡 ${t('tipWord')}</span><input class="inp" id="ex_note" value="${esc(e.note||'')}" placeholder="空杆→5→7.5kg…"></label>
     <button class="btn" onclick="saveExPop(${i})">${t('save')}</button>
     ${i>=0?`<button class="btn ghost" style="margin-top:10px" onclick="delExPop(${i})">${t('del')}</button>`:''}`);}
-function saveExPop(i){const n=v('ex_n'),m=v('ex_m');if(!n){toast(t('fillNamePw'));return;}if(i>=0)S._wo[i]={n,m};else S._wo.push({n,m});closeModal();render();}
+function saveExPop(i){const n=v('ex_n');if(!n){toast(t('fillNamePw'));return;}
+  const e={n,sets:Math.max(1,parseInt(v('ex_sets'))||3),reps:v('ex_reps')||"10",wt:document.getElementById('ex_wt').value,note:v('ex_note')};
+  if(i>=0)S._wo[i]=e;else S._wo.push(e);closeModal();render();}
 function delExPop(i){S._wo.splice(i,1);closeModal();render();}
 async function saveWO(){S._woName=v('wo_name')||S._woName;CFG.workouts[S._woKey]={name:S._woName||("Glute "+S._woKey),ex:S._wo.filter(e=>e.n)};await saveCfg();toast(t('saved'));go('admin_wopick');}
 /* warmup */

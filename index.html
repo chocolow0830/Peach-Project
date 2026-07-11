@@ -12,18 +12,21 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--blush);color:var(--plum);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
-.wrap{max-width:480px;margin:0 auto;padding:0 18px 120px}
+.wrap{max-width:480px;margin:0 auto;padding:0 18px 130px}
 h1,h2,h3{font-family:'Fraunces',serif;margin:0}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,select,textarea{font-family:inherit;font-size:16px}
-.top{position:sticky;top:0;z-index:30;background:rgba(251,241,237,.92);backdrop-filter:blur(10px);max-width:480px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
-.top .brand{font-family:'Fraunces';font-weight:600;font-size:15px}
-.top .sp{flex:1}
-.seg{display:flex;background:var(--pill);border-radius:20px;padding:3px}
-.seg button{font-size:12px;font-weight:600;padding:7px 11px;border-radius:18px;color:var(--soft)}
-.seg button.on{background:#fff;color:var(--coral-ink);box-shadow:0 2px 5px -2px rgba(120,60,50,.3)}
-.backrow{padding:14px 0 2px}.back{font-size:13px;font-weight:600;color:var(--soft);padding:6px 0}
+.nav{position:sticky;top:0;z-index:30;background:rgba(251,241,237,.94);backdrop-filter:blur(10px);max-width:480px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
+.nav .brand{font-family:'Fraunces';font-weight:600;font-size:15px}
+.nav .sp{flex:1}
+.langtog{display:flex;background:var(--pill);border-radius:16px;padding:2px}
+.langtog button{font-size:11.5px;font-weight:700;padding:6px 10px;border-radius:14px;color:var(--soft)}
+.langtog button.on{background:#fff;color:var(--coral-ink)}
+.logout{font-size:12px;font-weight:600;color:var(--soft);padding:7px 11px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.backbtn{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--coral-ink);background:#fff;border:1px solid var(--line);padding:11px 18px;border-radius:14px;box-shadow:var(--shadow);margin:16px 0 6px}
+.backbtn:active{transform:translateY(1px)}
 .card{background:var(--card);border-radius:20px;padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
+.card.tap{cursor:pointer}.card.tap:active{transform:scale(.995)}
 .eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--peach);font-weight:700;margin-bottom:10px}
 .muted{color:var(--soft)}.center{text-align:center}
 .hero{text-align:center;padding:24px 0 4px}
@@ -48,7 +51,7 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .lrow .t{flex:1;min-width:0}.lrow .t .h{font-weight:600;font-size:15px}
 .lrow .t .s{font-size:12px;color:var(--soft);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lrow .r{font-size:12px;color:var(--soft);font-weight:600;flex:none;display:flex;align-items:center;gap:6px}
-.lrow .chev{color:var(--peach);font-size:18px}
+.lrow .chev{color:var(--peach);font-size:20px}
 .dot2{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--line)}.dot2.on{background:var(--ok)}
 .light{display:inline-block;width:10px;height:10px;border-radius:50%}.light.g{background:var(--ok)}.light.y{background:var(--warn)}.light.r{background:var(--bad)}
 .section-label{font-family:'Fraunces';font-size:13px;font-weight:600;color:var(--plum);margin:22px 2px 10px;display:flex;align-items:center;gap:8px}
@@ -56,12 +59,12 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .exlist{margin-top:4px}
 .ex{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
 .ex:last-child{border-bottom:none}
-.exbox{width:22px;height:22px;border-radius:7px;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:12px;color:#fff;background:#fff}
+.exbox{width:24px;height:24px;border-radius:7px;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:13px;color:#fff;background:#fff}
 .ex.on .exbox{background:var(--coral);border-color:var(--coral)}
 .ex .info{flex:1;min-width:0}.ex .en{font-weight:600;font-size:14px}.ex .em{font-size:11.5px;color:var(--soft);margin-top:1px}
 .ex .kg{font-family:'Fraunces';font-weight:600;font-size:15px;color:var(--coral-ink);flex:none;text-align:right;min-width:52px}
-.ex .kgin{width:70px;flex:none}
-.ex .kgin input{width:100%;padding:7px 9px;font-size:14px;border:1px solid var(--line);border-radius:9px;text-align:center;background:#FFFDFC}
+.ex .kgin{width:76px;flex:none}
+.ex .kgin input{width:100%;padding:9px;font-size:14px;border:1px solid var(--line);border-radius:9px;text-align:center;background:#FFFDFC}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--coral);color:#fff;font-weight:600;font-size:15px;padding:15px;border-radius:15px;width:100%;box-shadow:0 8px 18px -6px rgba(222,107,82,.5)}
 .btn:active{transform:translateY(1px)}
 .btn.ghost{background:#fff;color:var(--coral-ink);box-shadow:none;border:1px solid var(--line)}
@@ -69,21 +72,20 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .fab{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:40;max-width:480px;width:calc(100% - 36px)}
 label.f{display:block;margin-bottom:12px}
 label.f .lab{font-size:12px;font-weight:600;color:var(--soft);margin-bottom:5px;display:block}
-.inp{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#FFFDFC;color:var(--plum);outline:none}
+.inp{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:#FFFDFC;color:var(--plum);outline:none}
 .inp:focus{border-color:var(--peach);box-shadow:0 0 0 3px rgba(232,146,124,.16)}
 textarea.inp{min-height:52px;resize:vertical}
 .r3{display:flex;gap:8px}.r3>label{flex:1}
-.chk{display:flex;align-items:center;gap:11px;padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:12px;font-weight:600;font-size:14px}
-.chk input{width:22px;height:22px;accent-color:var(--coral)}
+.chk{display:flex;align-items:center;gap:11px;padding:14px 15px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:12px;font-weight:600;font-size:14px}
+.chk input{width:24px;height:24px;accent-color:var(--coral)}
 .lightpick{display:flex;gap:8px;margin-bottom:6px}
-.lightpick button{flex:1;padding:12px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px}
+.lightpick button{flex:1;padding:13px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px}
 .lightpick button.sel{border-color:var(--coral);box-shadow:0 0 0 3px rgba(222,107,82,.14)}
 .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 10px;border-radius:20px}
 .badge.starter{background:#F0E1C6;color:#8a6a35}.badge.active{background:#DEEEE4;color:var(--ok)}.badge.grad{background:linear-gradient(135deg,var(--gold),#b8863f);color:#fff}
 .note{font-size:12.5px;color:var(--soft);background:var(--blush);border-radius:12px;padding:11px 13px;margin-top:8px;line-height:1.5}
-.remind{background:linear-gradient(135deg,#FFF6E9,#FDEBD6);border:1px solid var(--gold-soft,#EFDCBE);border-radius:16px;padding:14px 16px;margin-bottom:14px;font-size:13.5px;box-shadow:var(--shadow)}
+.remind{background:linear-gradient(135deg,#FFF6E9,#FDEBD6);border:1px solid #EFDCBE;border-radius:16px;padding:14px 16px;margin-bottom:14px;font-size:13.5px;box-shadow:var(--shadow)}
 .remind b{color:#8a6a35}
-.select-client{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:#FFFDFC;font-size:15px;margin-bottom:12px}
 .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:var(--plum);color:#fff;padding:12px 20px;border-radius:30px;font-size:13.5px;z-index:200;box-shadow:var(--shadow)}
 .emptyx{text-align:center;padding:34px 20px;color:var(--soft)}.emptyx .b{font-size:40px}
 .smalllink{color:var(--soft);font-size:12.5px;text-decoration:underline;padding:6px}
@@ -93,9 +95,12 @@ textarea.inp{min-height:52px;resize:vertical}
 .adcard .em{font-size:26px;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--pill);flex:none}
 .adcard h3{font-size:16px}.adcard .s{font-size:12px;color:var(--soft);margin-top:2px}
 .adcard .chev{margin-left:auto;color:var(--peach);font-size:20px}
-.exedit{background:var(--card);border-radius:14px;padding:12px;box-shadow:var(--shadow);margin-bottom:10px}
-.exedit .delx{float:right;color:var(--bad);font-size:12px;font-weight:600}
-.exedit input{margin-bottom:8px}
+.exedit{background:var(--card);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);margin-bottom:10px;display:flex;align-items:center;gap:12px;width:100%;text-align:left}
+.exedit .info{flex:1;min-width:0}.exedit .en{font-weight:600;font-size:14px}.exedit .em{font-size:11.5px;color:var(--soft)}
+.exedit .chev{color:var(--peach);font-size:18px}
+.sesscard{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px;margin-bottom:12px;width:100%;text-align:left;display:block}
+.sesscard .hd{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.sesscard h3{font-size:16px}
 </style>
 </head>
 <body>
@@ -106,9 +111,7 @@ textarea.inp{min-height:52px;resize:vertical}
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
 <script>
-/* =======================================================================
-   ⬇⬇⬇  FIREBASE 设定  ⬇⬇⬇
-   ======================================================================= */
+/* ===== Firebase ===== */
 const firebaseConfig = {
   apiKey: "AIzaSyANx3y_qTMk84gP4PviG_nHTX7DcYE4U4I",
   authDomain: "peach-project-d33eb.firebaseapp.com",
@@ -117,380 +120,416 @@ const firebaseConfig = {
   messagingSenderId: "887712153845",
   appId: "1:887712153845:web:3381f5040059f24a08c5bc"
 };
-const COL="peach_clients"; const CFGID="__config";
-const ADMIN_PW="pp930830"; // Admin 后台密码
+const COL="peach_clients", CFGID="__config";
+const ADMIN_EMAIL="admin", ADMIN_PW="pp930830";
 let db=null,FB_OK=false,FB_ERR="";
 try{
-  if(firebaseConfig.apiKey && firebaseConfig.apiKey!=="PASTE_HERE" && typeof firebase!=="undefined"){
-    firebase.initializeApp(firebaseConfig); db=firebase.firestore(); FB_OK=true;
-  }else if(typeof firebase==="undefined"){ FB_ERR="Firebase 没载入（检查网络）"; }
-  else{ FB_ERR="还没贴 Firebase 设定"; }
-}catch(e){ FB_ERR=(e&&e.message)||"Firebase 初始化失败"; }
+  if(firebaseConfig.apiKey && typeof firebase!=="undefined"){firebase.initializeApp(firebaseConfig);db=firebase.firestore();FB_OK=true;}
+  else if(typeof firebase==="undefined"){FB_ERR="Firebase not loaded";}
+}catch(e){FB_ERR=(e&&e.message)||"init failed";}
 
-/* ===== default programme config (real Project Fit workouts) ===== */
-const DEFAULT_CFG={
-  id:CFGID,
-  warmup:["Dynamic mobility"],
-  reminders:{coach:"",student:""},
-  workouts:{
-    A:{name:"Glute A",ex:[
-      {n:"Hip Thrust",m:"4×8–10 · 空杆→5kg/边→7.5kg/边 ×2"},
-      {n:"Romanian Deadlift",m:"3×10 · 5kg ×2→7.5kg (视情况)"},
-      {n:"Lunges (glute-focused)",m:"徒手→2.5kg/边→5kg/边 (视情况)"},
-      {n:"Cable Kickback",m:"3×15 · 5kg→7.5kg ×2"},
-      {n:"Hip Abductor",m:"3×20 · 5kg→10kg→15kg"}]},
-    B:{name:"Glute B",ex:[
-      {n:"Hip Thrust",m:"4×8–10 · 空杆→5kg/边→7.5kg/边 ×2"},
-      {n:"Romanian Deadlift",m:"3×10 · 5kg ×2→7.5kg (视情况)"},
-      {n:"Hamstring Curl",m:"3×10–15 · 从最轻开始，逐步加"},
-      {n:"Hip Abductor",m:"3×20 · 5kg→10kg→15kg"},
-      {n:"Plank",m:"3组 · 每组30秒 (视情况)"}]},
-    C:{name:"Glute C",ex:[
-      {n:"Hip Thrust",m:"4×8–10 · 空杆→5kg/边→7.5kg/边 ×2"},
-      {n:"Stiff Leg Deadlift",m:"3×10 · 空杆学动作，之后比RDL −15% (视情况)"},
-      {n:"Smith Machine Lunges (glute)",m:"徒手→2.5kg/边→5kg/边 (视情况)"},
-      {n:"Cable Pull Through",m:"3×15 · 10kg→15kg→…"},
-      {n:"Glute Extension",m:"3×20 · 徒手→5kg→10kg (视情况)"}]},
-    D:{name:"Glute D",ex:[
-      {n:"Smith Machine Sumo Squat",m:"4×8–10 · 空杆→2.5kg/边→5kg/边 ×2 (视情况)"},
-      {n:"Bulgarian Split Squat",m:"3×10 · 沿用之前进度"},
-      {n:"Hamstring Curl",m:"3组 · 沿用之前进度"},
-      {n:"Cable Kickback",m:"3×12–15 (可加重到10次) · 沿用之前进度"},
-      {n:"Hip Abduction",m:"3组 · 沿用之前进度"}]},
-    E:{name:"Glute E",ex:[
-      {n:"Hip Thrust",m:"4×8–10 · 沿用之前进度"},
-      {n:"Romanian Deadlift",m:"3×10 · 沿用之前进度"},
-      {n:"Lunges (glute-focused)",m:"沿用之前进度"},
-      {n:"Cable Kickback",m:"3×15 · 沿用之前进度"},
-      {n:"Hip Abductor",m:"3×20 · 沿用之前进度"}]},
-    F:{name:"Glute F",ex:[
-      {n:"Squat",m:"4×8–10 · 沿用之前进度"},
-      {n:"Walking Lunges (大步幅·夹臀)",m:"沿用之前进度"},
-      {n:"Cable Pull Through",m:"3×15 · 沿用之前进度"},
-      {n:"Hip Abductor",m:"3×20 · 沿用之前进度"},
-      {n:"Side Plank",m:"3组 · 每边"}]},
-  }
+/* ===== i18n ===== */
+let lang=(function(){try{return localStorage.getItem('pp:lang')||'zh';}catch(e){return 'zh';}})();
+function setLang(l){lang=l;try{localStorage.setItem('pp:lang',l);}catch(e){}render();}
+const L={
+  login:{zh:"登入",en:"Log In"},logout:{zh:"退出",en:"Log out"},
+  email:{zh:"Email",en:"Email"},pw:{zh:"密码",en:"Password"},
+  loginSub:{zh:"用你的 Email 和密码登入",en:"Log in with your email and password"},
+  wrong:{zh:"Email 或密码错误",en:"Wrong email or password"},
+  save:{zh:"保存",en:"Save"},cancel:{zh:"取消",en:"Cancel"},del:{zh:"删除",en:"Delete"},
+  back:{zh:"返回",en:"Back"},add:{zh:"新增",en:"Add"},name:{zh:"名字",en:"Name"},
+  date:{zh:"日期",en:"Date"},notes:{zh:"备注",en:"Notes"},done:{zh:"完成",en:"Done"},
+  coachDash:{zh:"教练后台",en:"Coach Dashboard"},peachGirls:{zh:"位 Peach Girl",en:"Peach Girls"},
+  newStudent:{zh:"＋ 建立新学员",en:"＋ Add New Student"},noStudents:{zh:"还没有学员，点下面建立第一位。",en:"No students yet. Add your first below."},
+  code:{zh:"专属代号",en:"Access Code"},coachName:{zh:"负责教练",en:"Coach"},
+  create:{zh:"建立",en:"Create"},fillNamePw:{zh:"请填名字、Email 和密码",en:"Please fill name, email and password"},
+  emailUsed:{zh:"这个 Email 已被使用",en:"This email is already used"},created:{zh:"已建立 ✓",en:"Created ✓"},
+  saved:{zh:"已保存 ✓",en:"Saved ✓"},deleted:{zh:"已删除",en:"Deleted"},
+  myPassport:{zh:"我的 Peach 护照",en:"My Peach Passport"},journey:{zh:"Your 90-Day Journey",en:"Your 90-Day Journey"},
+  afterEach:{zh:"每次训练后",en:"After Every Session"},supp:{zh:"💪 1 勺 Whey Protein ＋ 5g Creatine — 帮你备好，练完就喝。",en:"💪 1 scoop Whey Protein + 5g Creatine — prepared for you, drink right after."},
+  completePct:{zh:"完成",en:"Completed"},nextStep:{zh:"下一步",en:"Next"},allDone:{zh:"🎉 完成了整个旅程！",en:"🎉 Whole journey complete!"},
+  day1:{zh:"Day 1 · 起点",en:"Day 1 · Baseline"},weight:{zh:"体重",en:"Weight"},hip:{zh:"臀围",en:"Hip"},waist:{zh:"腰围",en:"Waist"},
+  goalLabel:{zh:"目标",en:"Goal"},whyChange:{zh:"为什么想改变",en:"Why change"},editDay1:{zh:"编辑 Day 1",en:"Edit Day 1"},addPhoto:{zh:"＋ Day 1 照片",en:"＋ Day 1 photo"},uploadPhoto:{zh:"＋ 上传照片",en:"＋ Upload photo"},removePhoto:{zh:"移除照片",en:"Remove photo"},
+  starter:{zh:"Starter · 4 堂启动",en:"Starter · 4 Sessions"},completed:{zh:"已完成",en:"Completed"},notDone:{zh:"未完成",en:"Not done"},
+  peach12:{zh:"Peach Project · 12 周",en:"Peach Project · 12 Weeks"},week:{zh:"Week",en:"Week"},
+  weeklyGoal:{zh:"本周小目标",en:"Weekly goal"},checkin:{zh:"Weekly Check-In",en:"Weekly Check-In"},
+  statusLight:{zh:"状态灯",en:"Status"},good:{zh:"状态很好",en:"On track"},watch:{zh:"需注意",en:"Watch"},followup:{zh:"要跟进",en:"Follow up"},
+  bodyData:{zh:"这周的身体数据",en:"This week's numbers"},warmup:{zh:"🔥 热身 · Dynamic Warm-up",en:"🔥 Dynamic Warm-up"},
+  session:{zh:"Session",en:"Session"},wholeDone:{zh:"整堂完成",en:"Session complete"},tapToLog:{zh:"点击记录",en:"Tap to log"},
+  grad:{zh:"Graduation · 毕业",en:"Graduation"},gradCongrat:{zh:"恭喜毕业！",en:"Congratulations!"},endWeight:{zh:"结束体重",en:"End weight"},endHip:{zh:"结束臀围",en:"End hip"},hipChange:{zh:"臀围变化",en:"Hip change"},coachMsg:{zh:"教练寄语",en:"Coach's message"},recordGrad:{zh:"🎓 记录毕业",en:"🎓 Record graduation"},editGrad:{zh:"编辑毕业",en:"Edit graduation"},gradEmpty:{zh:"完成 12 周后，在这里记录毕业成果。",en:"After 12 weeks, record graduation results here."},markGrad:{zh:"标记为已毕业 🎓",en:"Mark as graduated 🎓"},
+  delStudent:{zh:"删除这位学员",en:"Delete this student"},delConfirm:{zh:"会永久删除所有档案，无法复原。",en:"This permanently deletes all records."},confirmDel:{zh:"确定删除",en:"Confirm delete"},
+  admin:{zh:"Admin 后台",en:"Admin"},manageSettings:{zh:"管理设定",en:"Manage settings"},adminSub:{zh:"在这里改的东西，会同步到所有教练和学员的手机。",en:"Changes here sync to all coaches and students."},
+  woCard:{zh:"训练动作",en:"Workouts"},woSub:{zh:"编辑 Glute A–F 的动作与重量",en:"Edit Glute A–F exercises & weights"},
+  warmCard:{zh:"热身动作",en:"Warm-up"},warmSub:{zh:"Dynamic warm-up 清单",en:"Dynamic warm-up list"},
+  remCard:{zh:"提醒 / 通知",en:"Reminders"},remSub:{zh:"给教练、给学员的提醒",en:"For coaches & students"},
+  coachAcc:{zh:"教练账号",en:"Coach Accounts"},coachAccSub:{zh:"新增 / 管理教练登入",en:"Add / manage coach logins"},
+  pickWO:{zh:"选一套训练",en:"Pick a workout"},exercises:{zh:"个动作",en:"exercises"},
+  editWO:{zh:"编辑训练",en:"Edit workout"},addEx:{zh:"＋ 加一个动作",en:"＋ Add exercise"},exName:{zh:"动作名字",en:"Exercise name"},exPresc:{zh:"组数 / 重量说明",en:"Sets / weight note"},
+  warmTitle:{zh:"热身动作",en:"Warm-up movements"},warmHint:{zh:"每一周的训练详情里都会显示这些热身。",en:"Shown in every week's detail."},addWarm:{zh:"＋ 加一个热身",en:"＋ Add warm-up"},
+  remTitle:{zh:"提醒 / 通知",en:"Reminders"},forCoach:{zh:"📣 给教练看",en:"📣 For coaches"},forCoachHint:{zh:"显示在教练后台顶部",en:"Shown at top of coach dashboard"},forStudent:{zh:"💌 给学员看",en:"💌 For students"},forStudentHint:{zh:"显示在学员护照顶部",en:"Shown at top of student passport"},
+  coachAccounts:{zh:"教练账号",en:"Coach Accounts"},addCoach:{zh:"＋ 新增教练",en:"＋ Add coach"},noCoaches:{zh:"还没有教练账号。",en:"No coach accounts yet."},
+  remCoachPh:{zh:"例：本周记得帮学员做臀围测量并拍照",en:"e.g. Remember hip measurement + photo this week"},remStuPh:{zh:"例：记得每次训练后30分钟内补充蛋白～",en:"e.g. Take protein within 30 min after each session~"},
+  toCoach:{zh:"📣 给教练：",en:"📣 For coaches: "},toStudent:{zh:"💌 提醒：",en:"💌 Reminder: "},
+  loadErr:{zh:"连不上数据库，检查 Firestore 是否已建立、规则是否开放。",en:"Can't reach the database. Check Firestore is created and rules are open."},
+  loading:{zh:"载入中…",en:"Loading…"}
 };
+function t(k){const o=L[k];return o?(o[lang]||o.zh):k;}
+
+/* ===== programme config ===== */
+const DEFAULT_CFG={id:CFGID,warmup:["Dynamic mobility"],reminders:{coach:"",student:""},
+  coaches:[{name:"Zeta (demo)",email:"zeta@demo.com",password:"123456"}],
+  workouts:{
+    A:{name:"Glute A",ex:[{n:"Hip Thrust",m:"4×8–10 · 空杆→5kg/边→7.5kg/边 ×2"},{n:"Romanian Deadlift",m:"3×10 · 5kg ×2→7.5kg (视情况)"},{n:"Lunges (glute-focused)",m:"徒手→2.5kg/边→5kg/边 (视情况)"},{n:"Cable Kickback",m:"3×15 · 5kg→7.5kg ×2"},{n:"Hip Abductor",m:"3×20 · 5kg→10kg→15kg"}]},
+    B:{name:"Glute B",ex:[{n:"Hip Thrust",m:"4×8–10 · 空杆→5kg/边→7.5kg/边 ×2"},{n:"Romanian Deadlift",m:"3×10 · 5kg ×2→7.5kg (视情况)"},{n:"Hamstring Curl",m:"3×10–15 · 从最轻开始，逐步加"},{n:"Hip Abductor",m:"3×20 · 5kg→10kg→15kg"},{n:"Plank",m:"3组 · 每组30秒 (视情况)"}]},
+    C:{name:"Glute C",ex:[{n:"Hip Thrust",m:"4×8–10 · 空杆→5kg/边→7.5kg/边 ×2"},{n:"Stiff Leg Deadlift",m:"3×10 · 空杆学动作，之后比RDL −15% (视情况)"},{n:"Smith Machine Lunges (glute)",m:"徒手→2.5kg/边→5kg/边 (视情况)"},{n:"Cable Pull Through",m:"3×15 · 10kg→15kg→…"},{n:"Glute Extension",m:"3×20 · 徒手→5kg→10kg (视情况)"}]},
+    D:{name:"Glute D",ex:[{n:"Smith Machine Sumo Squat",m:"4×8–10 · 空杆→2.5kg/边→5kg/边 ×2 (视情况)"},{n:"Bulgarian Split Squat",m:"3×10 · 沿用之前进度"},{n:"Hamstring Curl",m:"3组 · 沿用之前进度"},{n:"Cable Kickback",m:"3×12–15 (可加重到10次) · 沿用之前进度"},{n:"Hip Abduction",m:"3组 · 沿用之前进度"}]},
+    E:{name:"Glute E",ex:[{n:"Hip Thrust",m:"4×8–10 · 沿用之前进度"},{n:"Romanian Deadlift",m:"3×10 · 沿用之前进度"},{n:"Lunges (glute-focused)",m:"沿用之前进度"},{n:"Cable Kickback",m:"3×15 · 沿用之前进度"},{n:"Hip Abductor",m:"3×20 · 沿用之前进度"}]},
+    F:{name:"Glute F",ex:[{n:"Squat",m:"4×8–10 · 沿用之前进度"},{n:"Walking Lunges (大步幅·夹臀)",m:"沿用之前进度"},{n:"Cable Pull Through",m:"3×15 · 沿用之前进度"},{n:"Hip Abductor",m:"3×20 · 沿用之前进度"},{n:"Side Plank",m:"3组 · 每边"}]},
+  }};
 let CFG=JSON.parse(JSON.stringify(DEFAULT_CFG));
 function WO(k){return (CFG.workouts&&CFG.workouts[k])||{name:k,ex:[]};}
 function ww(i){return i<4?["A","B"]:i<8?["C","D"]:["E","F"];}
-function phase(i){return i<4?{tag:"Foundation",sub:"W1–4 · RPE 6–7 打技术"}:i<8?{tag:"Overload",sub:"W5–8 · RPE 7–8 加重"}:{tag:"High Intensity",sub:"W9–12 · RPE 8–9 冲成长"};}
+function phase(i){return i<4?{tag:"Foundation",sub:{zh:"W1–4 · RPE 6–7 打技术",en:"W1–4 · RPE 6–7 technique"}}:i<8?{tag:"Overload",sub:{zh:"W5–8 · RPE 7–8 加重",en:"W5–8 · RPE 7–8 add load"}}:{tag:"High Intensity",sub:{zh:"W9–12 · RPE 8–9 冲成长",en:"W9–12 · RPE 8–9 max growth"}};}
+function phSub(i){const s=phase(i).sub;return s[lang]||s.zh;}
 
-/* ===== storage (Firestore) ===== */
+/* ===== storage ===== */
 let _cache={};
 async function allClients(){const qs=await db.collection(COL).get();const a=[];_cache={};qs.forEach(d=>{if(d.id.indexOf("__")===0)return;const c=d.data();a.push(c);_cache[c.id]=c;});return a;}
-async function getIndex(){const a=await allClients();return a.map(c=>({id:c.id,name:c.name,code:c.code,coach:c.coach,startDate:c.startDate,photo:c.day1&&c.day1.photo?1:0}));}
 async function getClient(id){if(_cache[id])return _cache[id];try{const s=await db.collection(COL).doc(id).get();if(s.exists){_cache[id]=s.data();return _cache[id];}return null;}catch(e){return null;}}
-async function saveClient(c){_cache[c.id]=c;try{await db.collection(COL).doc(c.id).set(c);}catch(e){toast("保存失败，检查网络");}}
+async function saveClient(c){_cache[c.id]=c;try{await db.collection(COL).doc(c.id).set(c);}catch(e){toast("保存失败/save failed");}}
 async function loadCfg(){try{const s=await db.collection(COL).doc(CFGID).get();
-  if(s.exists){CFG=Object.assign(JSON.parse(JSON.stringify(DEFAULT_CFG)),s.data());if(!CFG.workouts)CFG.workouts=DEFAULT_CFG.workouts;if(!CFG.warmup)CFG.warmup=DEFAULT_CFG.warmup.slice();if(!CFG.reminders)CFG.reminders={coach:"",student:""};}
-  else{await db.collection(COL).doc(CFGID).set(DEFAULT_CFG);CFG=JSON.parse(JSON.stringify(DEFAULT_CFG));}
-}catch(e){}}
-async function saveCfg(){CFG.id=CFGID;try{await db.collection(COL).doc(CFGID).set(CFG);}catch(e){toast("保存失败");}}
+  if(s.exists){CFG=Object.assign(JSON.parse(JSON.stringify(DEFAULT_CFG)),s.data());if(!CFG.workouts)CFG.workouts=DEFAULT_CFG.workouts;if(!CFG.warmup)CFG.warmup=DEFAULT_CFG.warmup.slice();if(!CFG.reminders)CFG.reminders={coach:"",student:""};if(!CFG.coaches)CFG.coaches=[];}
+  else{await db.collection(COL).doc(CFGID).set(DEFAULT_CFG);CFG=JSON.parse(JSON.stringify(DEFAULT_CFG));}}catch(e){}}
+async function saveCfg(){CFG.id=CFGID;try{await db.collection(COL).doc(CFGID).set(CFG);}catch(e){toast("保存失败/save failed");}}
 
-/* ===== client factory ===== */
+/* ===== factory ===== */
 function blankS(){return{done:false,date:"",ex:[],wt:[],notes:""};}
-function newClient(name,code,coach){const weeks=[];for(let w=0;w<12;w++)weeks.push({goal:"",check:{weight:"",waist:"",hip:"",light:""},s1:blankS(),s2:blankS()});
-  const titles=["Discover · 身体评估","Activate · 唤醒臀肌","Believe · 看见改变","Commit · 加入旅程"];
-  return{id:"c"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),name,code,coach,startDate:new Date().toISOString().slice(0,10),
-    day1:{photo:"",weight:"",hip:"",waist:"",goal:"",why:""},starter:titles.map(t=>({title:t,done:false,date:"",notes:""})),weeks,
-    graduation:{done:false,date:"",photo:"",weight:"",hip:"",message:""}};}
-function demo(){const c=newClient("Michelle (示范)","PEACH01","Zeta");
-  c.day1={photo:"",weight:"58",hip:"92",waist:"71",goal:"想穿回旧牛仔裤、拍照有 shape",why:"生完宝宝后想找回自信"};
-  c.starter.forEach((s,i)=>{s.done=true;s.date="2026-06-0"+(i+2);});c.starter[3].notes="臀部发力明显进步，已邀请进 12 周 ✓";
+function newClient(o){const weeks=[];for(let w=0;w<12;w++)weeks.push({goal:"",check:{weight:"",waist:"",hip:"",light:""},s1:blankS(),s2:blankS()});
+  const titles=["Discover","Activate","Believe","Commit"];
+  return{id:"c"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),name:o.name,code:o.code,email:(o.email||"").toLowerCase(),password:o.password||"",coach:o.coach||"",coachEmail:(o.coachEmail||"").toLowerCase(),
+    startDate:new Date().toISOString().slice(0,10),day1:{photo:"",weight:"",hip:"",waist:"",goal:"",why:""},
+    starter:titles.map(t=>({title:t,done:false,date:"",notes:""})),weeks,graduation:{done:false,date:"",photo:"",weight:"",hip:"",message:""}};}
+function demo(){const c=newClient({name:"Michelle (demo)",code:"PEACH01",email:"michelle@demo.com",password:"123456",coach:"Zeta",coachEmail:"zeta@demo.com"});
+  c.day1={photo:"",weight:"58",hip:"92",waist:"71",goal:"想穿回旧牛仔裤、拍照有 shape / Fit into old jeans",why:"生完宝宝后想找回自信 / Regain confidence after baby"};
+  c.starter.forEach((s,i)=>{s.done=true;s.date="2026-06-0"+(i+2);});
   const kg=[["空杆","5kg","徒手","5kg","10kg"],["5kg/边","5kg","2.5kg/边","7.5kg","10kg"]];
-  for(let w=0;w<3;w++){const k=c.weeks[w];
-    k.goal=w===0?"学会正确 Hip Thrust 发力":w===1?"稳定 RDL 动作":"加重 Cable Kickback";
-    k.check={weight:(58-w*0.3).toFixed(1),waist:(71-w)+"",hip:(92+w*0.4).toFixed(1),light:w<2?"g":"y"};
-    [k.s1,k.s2].forEach((s,si)=>{s.done=true;s.date="2026-06-"+(10+w*3+si);s.ex=[true,true,true,true,true];s.wt=kg[si].slice();});}
-  c.weeks[3].goal="完成 Foundation 阶段";return c;}
+  for(let w=0;w<3;w++){const k=c.weeks[w];k.goal=["学会 Hip Thrust 发力","稳定 RDL","加重 Cable Kickback"][w];k.check={weight:(58-w*0.3).toFixed(1),waist:(71-w)+"",hip:(92+w*0.4).toFixed(1),light:w<2?"g":"y"};[k.s1,k.s2].forEach((s,si)=>{s.done=true;s.date="2026-06-"+(10+w*3+si);s.ex=[true,true,true,true,true];s.wt=kg[si].slice();});}
+  return c;}
 
 function prog(c){let d=0,t=0;c.starter.forEach(s=>{t++;if(s.done)d++;});c.weeks.forEach(w=>{t+=2;if(w.s1.done)d++;if(w.s2.done)d++;});t++;if(c.graduation.done)d++;return{done:d,total:t,pct:t?Math.round(d/t*100):0};}
-function badge(c){return c.graduation.done?'<span class="badge grad">🎓 已毕业</span>':c.weeks.some(w=>w.s1.done||w.s2.done)?'<span class="badge active">12周进行中</span>':'<span class="badge starter">Starter</span>';}
+function badge(c){return c.graduation.done?'<span class="badge grad">🎓 '+t('gradCongrat')+'</span>':c.weeks.some(w=>w.s1.done||w.s2.done)?'<span class="badge active">12W</span>':'<span class="badge starter">Starter</span>';}
 
 /* ===== utils ===== */
 const app=document.getElementById("app");
 function esc(s){return(s==null?"":""+s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
 function v(id){const e=document.getElementById(id);return e?e.value.trim():"";}
-function toast(m){const t=document.createElement("div");t.className="toast";t.textContent=m;document.getElementById("toastRoot").appendChild(t);setTimeout(()=>t.remove(),1800);}
+function toast(m){const t=document.createElement("div");t.className="toast";t.textContent=m;document.getElementById("toastRoot").appendChild(t);setTimeout(()=>t.remove(),1900);}
 function pickPhoto(cb){const inp=document.createElement("input");inp.type="file";inp.accept="image/*";inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const mx=640,sc=Math.min(1,mx/Math.max(img.width,img.height));const cv=document.createElement("canvas");cv.width=img.width*sc;cv.height=img.height*sc;cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);cb(cv.toDataURL("image/jpeg",.72));};img.src=rd.result;};rd.readAsDataURL(f);};inp.click();}
 
-/* ===== router ===== */
-let S={role:"girl",view:"gpick",cid:null,wk:0,adminUnlocked:false};
-function setRole(r){S.role=r;S.view=r==="coach"?"clist":(r==="admin"?(S.adminUnlocked?"admin":"admin_login"):"gpick");render();}
+/* ===== session / auth ===== */
+function getSess(){try{return JSON.parse(localStorage.getItem('pp:sess')||'null');}catch(e){return null;}}
+function setSess(s){SESS=s;try{localStorage.setItem('pp:sess',JSON.stringify(s));}catch(e){}}
+function clearSess(){SESS=null;try{localStorage.removeItem('pp:sess');}catch(e){}}
+let SESS=getSess();
+let S={view:"",cid:null,wk:0};
 function go(view,d){S.view=view;if(d)Object.assign(S,d);window.scrollTo(0,0);render();}
-function navbar(){return `<div class="top"><span class="brand">🍑 Peach Passport</span><span class="sp"></span>
-  <div class="seg"><button class="${S.role==='girl'?'on':''}" onclick="setRole('girl')">👀 学员</button>
-  <button class="${S.role==='coach'?'on':''}" onclick="setRole('coach')">🧑‍🏫 教练</button>
-  <button class="${S.role==='admin'?'on':''}" onclick="setRole('admin')">🛠</button></div></div>`;}
+async function doLogin(){
+  const email=v('lg_email').toLowerCase(),pw=v('lg_pw');
+  if(!email||!pw){toast(t('wrong'));return;}
+  if(email===ADMIN_EMAIL&&pw===ADMIN_PW){setSess({role:'admin'});S.view='admin';render();return;}
+  const co=(CFG.coaches||[]).find(c=>(c.email||'').toLowerCase()===email&&c.password===pw);
+  if(co){setSess({role:'coach',coachEmail:co.email,coachName:co.name});S.view='clist';render();return;}
+  const cls=await allClients();
+  const cl=cls.find(c=>(c.email||'').toLowerCase()===email&&c.password===pw);
+  if(cl){setSess({role:'student',clientId:cl.id});S.view='gview';S.cid=cl.id;render();return;}
+  toast(t('wrong'));
+}
+function logout(){clearSess();S={view:"",cid:null,wk:0};render();}
 
-async function render(){let h="";
-  if(S.role==="admin"){
-    if(!S.adminUnlocked){h=adminLoginScreen();}
-    else if(S.view==="admin_wo")h=adminWOScreen();else if(S.view==="admin_wopick")h=adminWOPick();
-    else if(S.view==="admin_warm")h=adminWarmScreen();else if(S.view==="admin_rem")h=adminRemScreen();else h=adminHome();
-  }else if(S.role==="coach"){
+/* ===== navbar ===== */
+function navbar(){return `<div class="nav"><span class="brand">🍑 Peach Passport</span><span class="sp"></span>
+  <div class="langtog"><button class="${lang==='zh'?'on':''}" onclick="setLang('zh')">中</button><button class="${lang==='en'?'on':''}" onclick="setLang('en')">EN</button></div>
+  ${SESS?`<button class="logout" onclick="logout()">${t('logout')}</button>`:''}</div>`;}
+
+/* ===== router ===== */
+async function render(){
+  if(!FB_OK){app.innerHTML=navbar()+`<div class="wrap"><div class="card"><div class="eyebrow" style="color:var(--bad)">Setup</div><p style="font-size:13.5px">${esc(FB_ERR)}</p></div></div>`;return;}
+  let h="";
+  if(!SESS){h=loginScreen();app.innerHTML=navbar()+`<div class="wrap">${h}</div>`;return;}
+  if(SESS.role==='admin'){
+    if(S.view==="admin_wo")h=adminWOScreen();else if(S.view==="admin_wopick")h=adminWOPick();
+    else if(S.view==="admin_warm")h=adminWarmScreen();else if(S.view==="admin_rem")h=adminRemScreen();
+    else if(S.view==="admin_coach")h=adminCoachScreen();else h=adminHome();
+  }else if(SESS.role==='coach'){
     if(S.view==="cweek")h=await weekScreen(true);else if(S.view==="cclient")h=await clientScreen(true);else h=await listScreen();
-  }else{
-    if(S.view==="gweek")h=await weekScreen(false);else if(S.view==="gview")h=await clientScreen(false);else h=await gpickScreen();
+  }else{ // student
+    S.cid=SESS.clientId;
+    if(S.view==="gweek")h=await weekScreen(false);else h=await clientScreen(false);
   }
   app.innerHTML=navbar()+`<div class="wrap">${h}</div>`;
   if(S._after){const f=S._after;S._after=null;f();}
 }
 
+/* ===== login ===== */
+function loginScreen(){
+  return `<div class="hero"><div class="big">🍑</div><h1>Peach Passport</h1><div class="tag">${t('journey')}</div></div>
+    <div class="card"><p class="muted" style="font-size:13px;margin-top:0">${t('loginSub')}</p>
+      <label class="f"><span class="lab">${t('email')}</span><input class="inp" id="lg_email" type="email" autocomplete="username" placeholder="you@email.com" style="text-transform:lowercase"></label>
+      <label class="f"><span class="lab">${t('pw')}</span><input class="inp" id="lg_pw" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></label>
+      <button class="btn" onclick="doLogin()">${t('login')}</button></div>
+    <div class="note center" style="font-size:11.5px">Demo — 学员 michelle@demo.com · 教练 zeta@demo.com · 密码 123456</div>`;
+}
+
 /* ===== coach list ===== */
 async function listScreen(){
-  const ix=(await getIndex()).slice().sort((a,b)=>(b.startDate||"").localeCompare(a.startDate||""));
-  const rem=CFG.reminders&&CFG.reminders.coach?`<div class="remind"><b>📣 给教练：</b> ${esc(CFG.reminders.coach)}</div>`:'';
+  let all;try{all=await allClients();}catch(e){return `<div class="card"><p style="font-size:13.5px">${t('loadErr')}</p></div>`;}
+  const mine=all.filter(c=>!SESS.coachEmail||(c.coachEmail||'').toLowerCase()===SESS.coachEmail.toLowerCase());
+  mine.sort((a,b)=>(b.startDate||"").localeCompare(a.startDate||""));
+  const rem=CFG.reminders&&CFG.reminders.coach?`<div class="remind"><b>${t('toCoach')}</b>${esc(CFG.reminders.coach)}</div>`:'';
   let rows;
-  if(!ix.length)rows=`<div class="emptyx"><div class="b">🍑</div><p>还没有学员，点下面建立第一位。</p></div>`;
-  else rows=`<div class="rowlist">`+ix.map(c=>`<button class="lrow" onclick="go('cclient',{cid:'${c.id}'})">
-    <div class="avatar" style="width:38px;height:38px;font-size:15px;border-radius:12px" data-id="${c.id}">${c.photo?'':esc((c.name||'?').slice(0,1).toUpperCase())}</div>
-    <div class="t"><div class="h">${esc(c.name)}</div><div class="s">代号 ${esc(c.code)} · ${esc(c.coach||'—')}</div></div>
-    <div class="r" data-prog="${c.id}">···</div><span class="chev">›</span></button>`).join("")+`</div>`;
-  S._after=()=>{ix.forEach(async c=>{const f=await getClient(c.id);if(!f)return;const pe=document.querySelector(`[data-prog="${c.id}"]`);if(pe)pe.textContent=prog(f).pct+"%";if(f.day1.photo){const a=document.querySelector(`.avatar[data-id="${c.id}"]`);if(a)a.innerHTML=`<img src="${f.day1.photo}">`;}});};
-  return `${rem}<div style="margin:16px 2px 12px"><div class="eyebrow" style="margin:0">教练后台</div><h1 style="font-size:24px">${ix.length} 位 Peach Girl</h1></div>${rows}
-    <div class="fab"><button class="btn" onclick="newSheet()">＋ 建立新学员</button></div>`;
+  if(!mine.length)rows=`<div class="emptyx"><div class="b">🍑</div><p>${t('noStudents')}</p></div>`;
+  else rows=`<div class="rowlist">`+mine.map(c=>{const p=prog(c);return `<button class="lrow" onclick="go('cclient',{cid:'${c.id}'})">
+    <div class="avatar" style="width:40px;height:40px;font-size:16px;border-radius:12px">${c.day1&&c.day1.photo?`<img src="${c.day1.photo}">`:esc((c.name||'?').slice(0,1).toUpperCase())}</div>
+    <div class="t"><div class="h">${esc(c.name)}</div><div class="s">${esc(c.email||c.code||'')}</div></div>
+    <div class="r">${p.pct}%</div><span class="chev">›</span></button>`;}).join("")+`</div>`;
+  return `${rem}<div style="margin:16px 2px 12px"><div class="eyebrow" style="margin:0">${t('coachDash')}${SESS.coachName?' · '+esc(SESS.coachName):''}</div>
+    <h1 style="font-size:24px">${mine.length} ${t('peachGirls')}</h1></div>${rows}
+    <div class="fab"><button class="btn" onclick="newStudentSheet()">${t('newStudent')}</button></div>`;
 }
-function newSheet(){showModal(`<h2 style="font-size:20px">新 Peach Girl 🍑</h2><p class="muted" style="font-size:12.5px;margin:4px 0 14px">建好后把名字+代号给学员，她就能在学员视角登入看到自己。</p>
-    <label class="f"><span class="lab">名字</span><input class="inp" id="n_name" placeholder="Michelle"></label>
-    <label class="f"><span class="lab">专属代号</span><input class="inp" id="n_code"></label>
-    <label class="f"><span class="lab">负责教练</span><input class="inp" id="n_coach" placeholder="Zeta / Evon"></label>
-    <button class="btn" onclick="createC()">建立</button>`);
+function newStudentSheet(){showModal(`<h2 style="font-size:20px">🍑 ${t('newStudent').replace('＋ ','')}</h2>
+    <label class="f"><span class="lab">${t('name')}</span><input class="inp" id="n_name" placeholder="Michelle"></label>
+    <label class="f"><span class="lab">${t('email')}</span><input class="inp" id="n_email" type="email" placeholder="student@email.com" style="text-transform:lowercase"></label>
+    <label class="f"><span class="lab">${t('pw')}</span><input class="inp" id="n_pw" placeholder="123456"></label>
+    <label class="f"><span class="lab">${t('code')}</span><input class="inp" id="n_code"></label>
+    <button class="btn" onclick="createStudent()">${t('create')}</button>`);
   document.getElementById("n_code").value="PEACH"+Math.floor(1000+Math.random()*9000);}
-async function createC(){const name=v('n_name'),code=v('n_code').toUpperCase(),coach=v('n_coach');
-  if(!name||!code){toast("请填名字和代号");return;}const ix=await getIndex();
-  if(ix.some(x=>(x.code||"").toUpperCase()===code)){toast("代号已用");return;}
-  const c=newClient(name,code,coach);await saveClient(c);closeModal();toast("已建立 ✓");go('cclient',{cid:c.id});}
+async function createStudent(){const name=v('n_name'),email=v('n_email').toLowerCase(),pw=v('n_pw'),code=v('n_code').toUpperCase();
+  if(!name||!email||!pw){toast(t('fillNamePw'));return;}
+  const all=await allClients();if(all.some(x=>(x.email||'').toLowerCase()===email)){toast(t('emailUsed'));return;}
+  const c=newClient({name,code,email,password:pw,coach:SESS.coachName||"",coachEmail:SESS.coachEmail||""});
+  await saveClient(c);closeModal();toast(t('created'));go('cclient',{cid:c.id});}
 
 /* ===== client overview ===== */
 async function clientScreen(edit){
-  const c=await getClient(S.cid);if(!c){S.view=edit?"clist":"gpick";return render();}
+  const c=await getClient(S.cid);if(!c){if(edit){S.view='clist';}else{logout();}return render();}
   const p=prog(c),nx=next(c);
-  const backBtn=edit?`<button class="back" onclick="go('clist')">‹ 返回学员列表</button>`:`<button class="back" onclick="go('gpick')">‹ 换一位</button>`;
-  const rem=(!edit&&CFG.reminders&&CFG.reminders.student)?`<div class="remind"><b>💌 提醒：</b> ${esc(CFG.reminders.student)}</div>`:'';
-  let h=`<div class="backrow">${backBtn}</div>${rem}
+  const back=edit?`<button class="backbtn" onclick="go('clist')">‹ ${t('back')}</button>`:'';
+  const rem=(!edit&&CFG.reminders&&CFG.reminders.student)?`<div class="remind"><b>${t('toStudent')}</b>${esc(CFG.reminders.student)}</div>`:'';
+  let h=`${back?'<div>'+back+'</div>':''}${rem}
   <div class="card" style="text-align:center;background:linear-gradient(160deg,#fff,#FFF4F0)">
     <div class="avatar" style="margin:2px auto 10px">${c.day1.photo?`<img src="${c.day1.photo}">`:esc(c.name.slice(0,1).toUpperCase())}</div>
     <h1 style="font-size:22px">${esc(c.name)}</h1><div style="margin:8px 0">${badge(c)}</div>
     <div class="progresswrap"><div class="progressbar" style="width:${p.pct}%"></div></div>
-    <div class="muted" style="font-size:12.5px">完成 <b style="color:var(--coral-ink)">${p.pct}%</b> · ${p.done}/${p.total}</div>
-    ${nx?`<div class="note" style="margin-top:12px;text-align:left">👉 下一步：<b>${esc(nx)}</b></div>`:`<div class="note" style="margin-top:12px">🎉 完成了整个旅程！</div>`}</div>`;
-  if(!edit)h+=`<div class="card"><div class="eyebrow">每次训练后</div><div style="font-size:13.5px">💪 1 勺 Whey Protein ＋ 5g Creatine — 帮你备好，练完就喝。</div></div>`;
+    <div class="muted" style="font-size:12.5px">${t('completePct')} <b style="color:var(--coral-ink)">${p.pct}%</b> · ${p.done}/${p.total}</div>
+    ${nx?`<div class="note" style="margin-top:12px;text-align:left">👉 ${t('nextStep')}：<b>${esc(nx)}</b></div>`:`<div class="note" style="margin-top:12px">${t('allDone')}</div>`}</div>`;
+  if(!edit)h+=`<div class="card"><div class="eyebrow">${t('afterEach')}</div><div style="font-size:13.5px">${t('supp')}</div></div>`;
   h+=baseCard(c,edit);
-  h+=`<div class="section-label">Starter · 4 堂启动</div><div class="rowlist">`+c.starter.map((s,i)=>`<button class="lrow ${s.done?'done':''}" ${edit?`onclick="editStarter('${c.id}',${i})"`:''} style="${edit?'':'cursor:default'}">
-      <div class="wnum">${s.done?'✓':i+1}</div><div class="t"><div class="h">${esc(s.title.split('·')[1]?s.title.split('·')[1].trim():s.title)}</div>
-      <div class="s">${s.done?('已完成 '+esc(s.date||'')):'未完成'}</div></div>${edit?'<span class="chev">›</span>':''}</button>`).join("")+`</div>`;
-  let lastP="";h+=`<div class="section-label">Peach Project · 12 周</div>`;let openRows="";
+  h+=`<div class="section-label">${t('starter')}</div><div class="rowlist">`+c.starter.map((s,i)=>`<button class="lrow ${s.done?'done':''}" ${edit?`onclick="editStarter('${c.id}',${i})"`:''} style="${edit?'':'cursor:default'}">
+      <div class="wnum">${s.done?'✓':i+1}</div><div class="t"><div class="h">${esc(s.title)}</div><div class="s">${s.done?(t('completed')+' '+esc(s.date||'')):t('notDone')}</div></div>${edit?'<span class="chev">›</span>':''}</button>`).join("")+`</div>`;
+  let lastP="";h+=`<div class="section-label">${t('peach12')}</div>`;let openRows="";
   c.weeks.forEach((w,i)=>{const ph=phase(i);
-    if(ph.tag!==lastP){if(openRows)h+=`<div class="rowlist">${openRows}</div>`;openRows="";lastP=ph.tag;h+=`<div class="section-label" style="margin-top:16px">${ph.tag}<span class="ph">${esc(ph.sub)}</span></div>`;}
+    if(ph.tag!==lastP){if(openRows)h+=`<div class="rowlist">${openRows}</div>`;openRows="";lastP=ph.tag;h+=`<div class="section-label" style="margin-top:16px">${ph.tag}<span class="ph">${esc(phSub(i))}</span></div>`;}
     const both=w.s1.done&&w.s2.done,k=ww(i);const lg=w.check.light?`<span class="light ${w.check.light}"></span>`:'';
     openRows+=`<button class="lrow ${both?'done':''}" onclick="go('${edit?'cweek':'gweek'}',{cid:'${c.id}',wk:${i}})">
-      <div class="wnum">${both?'✓':'W'+(i+1)}</div><div class="t"><div class="h">Week ${i+1} ${lg}</div><div class="s">${w.goal?esc(w.goal):WO(k[0]).name+' · '+WO(k[1]).name}</div></div>
+      <div class="wnum">${both?'✓':(t('week')==='Week'?'W':'W')+(i+1)}</div><div class="t"><div class="h">${t('week')} ${i+1} ${lg}</div><div class="s">${w.goal?esc(w.goal):WO(k[0]).name+' · '+WO(k[1]).name}</div></div>
       <div class="r"><span class="dot2 ${w.s1.done?'on':''}"></span><span class="dot2 ${w.s2.done?'on':''}"></span></div><span class="chev">›</span></button>`;});
   if(openRows)h+=`<div class="rowlist">${openRows}</div>`;
   h+=gradCard(c,edit);
-  if(edit)h+=`<button class="btn ghost" style="margin-top:6px" onclick="delC('${c.id}')">删除这位学员</button>`;
+  if(edit)h+=`<button class="btn ghost" style="margin-top:6px" onclick="delC('${c.id}')">${t('delStudent')}</button>`;
   return h;
 }
 function next(c){for(let i=0;i<c.starter.length;i++)if(!c.starter[i].done)return "Starter "+(i+1);
-  for(let i=0;i<c.weeks.length;i++){const k=ww(i);if(!c.weeks[i].s1.done)return "Week "+(i+1)+" · "+WO(k[0]).name;if(!c.weeks[i].s2.done)return "Week "+(i+1)+" · "+WO(k[1]).name;}
-  if(!c.graduation.done)return "毕业记录 🎓";return "";}
+  for(let i=0;i<c.weeks.length;i++){const k=ww(i);if(!c.weeks[i].s1.done)return t('week')+" "+(i+1)+" · "+WO(k[0]).name;if(!c.weeks[i].s2.done)return t('week')+" "+(i+1)+" · "+WO(k[1]).name;}
+  if(!c.graduation.done)return "🎓";return "";}
 
-/* ===== WEEK DETAIL ===== */
+/* ===== week detail ===== */
 async function weekScreen(edit){
   const c=await getClient(S.cid);if(!c)return render();
-  const i=S.wk,w=c.weeks[i],k=ww(i),ph=phase(i);const backTo=edit?'cclient':'gview';
-  const warm=(CFG.warmup&&CFG.warmup.length)?`<div class="card"><div class="eyebrow">🔥 热身 · Dynamic Warm-up</div><div style="font-size:13.5px">${CFG.warmup.map(x=>esc(x)).join(' · ')}</div></div>`:'';
-  const sess=(s,sIdx,woKey)=>{const wo=WO(woKey);const doneN=wo.ex.filter((_,ei)=>s.ex[ei]).length;
-    return `<div class="card"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <h3 style="font-size:16px">Session ${sIdx} · ${esc(wo.name)}</h3><span style="flex:1"></span>
-        <span class="muted" style="font-size:12px">${s.done?('✓ '+esc(s.date||'')):doneN+'/'+wo.ex.length}</span></div>
-      <div class="exlist">${wo.ex.map((e,ei)=>`<div class="ex ${s.ex[ei]?'on':''}">
-          <div class="exbox" ${edit?`onclick="toggleEx(${sIdx},${ei},this)"`:''}>${s.ex[ei]?'✓':''}</div>
-          <div class="info"><div class="en">${esc(e.n)}</div><div class="em">${esc(e.m)}</div></div>
-          ${edit?`<div class="kgin"><input id="s${sIdx}_wt${ei}" placeholder="kg" value="${esc(s.wt[ei]||'')}"></div>`:`<div class="kg">${s.wt[ei]?esc(s.wt[ei]):'—'}</div>`}
-        </div>`).join("")}</div>
-      ${edit?`<label class="chk" style="margin-top:14px"><input type="checkbox" id="s${sIdx}_done" ${s.done?'checked':''}>整堂完成</label>
-        <label class="f"><span class="lab">日期</span><input class="inp" id="s${sIdx}_date" type="date" value="${esc(s.date)}"></label>
-        <label class="f"><span class="lab">备注</span><textarea class="inp" id="s${sIdx}_notes">${esc(s.notes)}</textarea></label>`:(s.notes?`<div class="note">${esc(s.notes)}</div>`:'')}</div>`;};
-  let ci;
-  if(edit){ci=`<div class="card"><div class="eyebrow">Weekly Check-In</div>
-      <div class="r3"><label class="f"><span class="lab">体重</span><input class="inp" id="ck_w" value="${esc(w.check.weight)}"></label>
-      <label class="f"><span class="lab">腰围</span><input class="inp" id="ck_wa" value="${esc(w.check.waist)}"></label>
-      <label class="f"><span class="lab">臀围</span><input class="inp" id="ck_h" value="${esc(w.check.hip)}"></label></div>
-      <span class="lab" style="font-size:12px;font-weight:600;color:var(--soft)">状态灯</span>
-      <div class="lightpick" id="lp"><button data-l="g" class="${w.check.light==='g'?'sel':''}" onclick="pl('g')"><span class="light g"></span>Green</button>
-        <button data-l="y" class="${w.check.light==='y'?'sel':''}" onclick="pl('y')"><span class="light y"></span>Yellow</button>
-        <button data-l="r" class="${w.check.light==='r'?'sel':''}" onclick="pl('r')"><span class="light r"></span>Red</button></div></div>`;
-  }else{const has=w.check.weight||w.check.waist||w.check.hip||w.check.light;
-    ci=has?`<div class="card"><div class="eyebrow">这周的身体数据</div><div class="ci">
-      ${w.check.weight?`<span class="cichip">体重 <b>${esc(w.check.weight)}</b></span>`:''}${w.check.waist?`<span class="cichip">腰围 <b>${esc(w.check.waist)}</b></span>`:''}
-      ${w.check.hip?`<span class="cichip">臀围 <b>${esc(w.check.hip)}</b></span>`:''}${w.check.light?`<span class="cichip"><span class="light ${w.check.light}"></span> ${w.check.light==='g'?'状态很好':w.check.light==='y'?'需注意':'要跟进'}</span>`:''}</div></div>`:'';}
-  let h=`<div class="backrow"><button class="back" onclick="go('${backTo}',{cid:'${c.id}'})">‹ 返回 ${esc(c.name)}</button></div>
-    <div style="margin:2px 2px 14px"><div class="eyebrow" style="margin-bottom:4px">${ph.tag} · ${esc(ph.sub)}</div><h1 style="font-size:26px">Week ${i+1}</h1></div>`;
-  if(edit)h+=`<label class="f"><span class="lab">🎯 本周小目标</span><input class="inp" id="w_goal" value="${esc(w.goal)}"></label>`;
-  else if(w.goal)h+=`<div class="card" style="padding:14px 16px"><div style="font-family:Fraunces;color:var(--coral-ink);font-style:italic;font-size:13px">🎯 ${esc(w.goal)}</div></div>`;
-  h+=warm+ci+sess(w.s1,1,k[0])+sess(w.s2,2,k[1]);
-  if(edit)h+=`<button class="btn" onclick="saveWeek('${c.id}',${i})">保存 Week ${i+1}</button>`;
-  S._exbuf={s1:WO(k[0]).ex.map((_,ei)=>!!w.s1.ex[ei]),s2:WO(k[1]).ex.map((_,ei)=>!!w.s2.ex[ei])};S._light=w.check.light||"";
-  return h;
+  const i=S.wk,w=c.weeks[i],k=ww(i),ph=phase(i),backTo=edit?'cclient':'gview';
+  const warm=(CFG.warmup&&CFG.warmup.length)?`<div class="card"><div class="eyebrow">${t('warmup')}</div><div style="font-size:13.5px">${CFG.warmup.map(x=>esc(x)).join(' · ')}</div></div>`:'';
+  // check-in card
+  const has=w.check.weight||w.check.waist||w.check.hip||w.check.light;
+  let ciCard;
+  if(edit){ciCard=`<button class="card tap" style="width:100%;text-align:left;display:block" onclick="editMeta('${c.id}',${i})">
+      <div class="eyebrow">${t('checkin')} & ${t('weeklyGoal')}</div>
+      ${w.goal?`<div style="font-family:Fraunces;color:var(--coral-ink);font-style:italic;font-size:13px;margin-bottom:6px">🎯 ${esc(w.goal)}</div>`:''}
+      <div class="ci">${w.check.weight?`<span class="cichip">${t('weight')} <b>${esc(w.check.weight)}</b></span>`:''}${w.check.waist?`<span class="cichip">${t('waist')} <b>${esc(w.check.waist)}</b></span>`:''}${w.check.hip?`<span class="cichip">${t('hip')} <b>${esc(w.check.hip)}</b></span>`:''}${w.check.light?`<span class="cichip"><span class="light ${w.check.light}"></span></span>`:''}${(!has&&!w.goal)?`<span class="muted" style="font-size:12.5px">${t('tapToLog')} ›</span>`:''}</div></button>`;
+  }else{ciCard=(has||w.goal)?`<div class="card"><div class="eyebrow">${t('bodyData')}</div>
+      ${w.goal?`<div style="font-family:Fraunces;color:var(--coral-ink);font-style:italic;font-size:13px;margin-bottom:6px">🎯 ${esc(w.goal)}</div>`:''}
+      <div class="ci">${w.check.weight?`<span class="cichip">${t('weight')} <b>${esc(w.check.weight)}</b></span>`:''}${w.check.waist?`<span class="cichip">${t('waist')} <b>${esc(w.check.waist)}</b></span>`:''}${w.check.hip?`<span class="cichip">${t('hip')} <b>${esc(w.check.hip)}</b></span>`:''}${w.check.light?`<span class="cichip"><span class="light ${w.check.light}"></span> ${w.check.light==='g'?t('good'):w.check.light==='y'?t('watch'):t('followup')}</span>`:''}</div></div>`:'';}
+  // session cards
+  const sCard=(s,n,key)=>{const wo=WO(key);const dn=wo.ex.filter((_,ei)=>s.ex[ei]).length;
+    if(edit){return `<button class="sesscard" onclick="editSession('${c.id}',${i},${n})">
+        <div class="hd"><h3>${t('session')} ${n} · ${esc(wo.name)}</h3><span style="flex:1"></span><span class="muted" style="font-size:12px">${s.done?'✓ '+esc(s.date||''):dn+'/'+wo.ex.length+' ›'}</span></div>
+        <div class="muted" style="font-size:12px">${wo.ex.map(e=>esc(e.n)).join(' · ')}</div></button>`;}
+    return `<div class="sesscard"><div class="hd"><h3>${t('session')} ${n} · ${esc(wo.name)}</h3><span style="flex:1"></span><span class="muted" style="font-size:12px">${s.done?'✓ '+esc(s.date||''):dn+'/'+wo.ex.length}</span></div>
+      <div class="exlist">${wo.ex.map((e,ei)=>`<div class="ex ${s.ex[ei]?'on':''}"><div class="exbox">${s.ex[ei]?'✓':''}</div>
+        <div class="info"><div class="en">${esc(e.n)}</div><div class="em">${esc(e.m)}</div></div>
+        <div class="kg">${s.wt[ei]?esc(s.wt[ei]):'—'}</div></div>`).join("")}</div>
+      ${s.notes?`<div class="note">${esc(s.notes)}</div>`:''}</div>`;};
+  return `<div><button class="backbtn" onclick="go('${backTo}',{cid:'${c.id}'})">‹ ${esc(c.name)}</button></div>
+    <div style="margin:6px 2px 14px"><div class="eyebrow" style="margin-bottom:4px">${ph.tag} · ${esc(phSub(i))}</div><h1 style="font-size:26px">${t('week')} ${i+1}</h1></div>
+    ${warm}${ciCard}${sCard(w.s1,1,k[0])}${sCard(w.s2,2,k[1])}`;
 }
-function toggleEx(sIdx,ei,el){S._exbuf["s"+sIdx][ei]=!S._exbuf["s"+sIdx][ei];const on=S._exbuf["s"+sIdx][ei];el.parentElement.classList.toggle('on',on);el.textContent=on?'✓':'';}
+async function editMeta(id,i){const c=await getClient(id),w=c.weeks[i];S._light=w.check.light||"";
+  showModal(`<h2 style="font-size:20px">${t('week')} ${i+1}</h2>
+    <label class="f"><span class="lab">🎯 ${t('weeklyGoal')}</span><input class="inp" id="w_goal" value="${esc(w.goal)}"></label>
+    <div class="eyebrow" style="margin-top:6px">${t('checkin')}</div>
+    <div class="r3"><label class="f"><span class="lab">${t('weight')}</span><input class="inp" id="ck_w" value="${esc(w.check.weight)}"></label>
+      <label class="f"><span class="lab">${t('waist')}</span><input class="inp" id="ck_wa" value="${esc(w.check.waist)}"></label>
+      <label class="f"><span class="lab">${t('hip')}</span><input class="inp" id="ck_h" value="${esc(w.check.hip)}"></label></div>
+    <span class="lab" style="font-size:12px;font-weight:600;color:var(--soft)">${t('statusLight')}</span>
+    <div class="lightpick" id="lp"><button data-l="g" class="${w.check.light==='g'?'sel':''}" onclick="pl('g')"><span class="light g"></span>Green</button>
+      <button data-l="y" class="${w.check.light==='y'?'sel':''}" onclick="pl('y')"><span class="light y"></span>Yellow</button>
+      <button data-l="r" class="${w.check.light==='r'?'sel':''}" onclick="pl('r')"><span class="light r"></span>Red</button></div>
+    <button class="btn" style="margin-top:10px" onclick="saveMeta('${id}',${i})">${t('save')}</button>`);}
 function pl(l){S._light=l;document.querySelectorAll('#lp button').forEach(b=>b.classList.toggle('sel',b.dataset.l===l));}
-async function saveWeek(id,i){const c=await getClient(id),w=c.weeks[i],k=ww(i);
-  w.goal=v('w_goal');w.check={weight:v('ck_w'),waist:v('ck_wa'),hip:v('ck_h'),light:S._light||""};
-  [1,2].forEach(n=>{const s=w["s"+n],exdef=WO(k[n-1]).ex;s.done=document.getElementById('s'+n+'_done').checked;s.date=v('s'+n+'_date');s.notes=v('s'+n+'_notes');
-    s.ex=exdef.map((_,ei)=>(S._exbuf["s"+n]&&S._exbuf["s"+n][ei])||false);s.wt=exdef.map((_,ei)=>v('s'+n+'_wt'+ei));});
-  await saveClient(c);toast("Week "+(i+1)+" 已保存 ✓");go(S.role==="coach"?'cclient':'gview',{cid:id});}
+async function saveMeta(id,i){const c=await getClient(id),w=c.weeks[i];w.goal=v('w_goal');w.check={weight:v('ck_w'),waist:v('ck_wa'),hip:v('ck_h'),light:S._light||""};await saveClient(c);closeModal();toast(t('saved'));render();}
+async function editSession(id,i,n){const c=await getClient(id),w=c.weeks[i],key=ww(i)[n-1],wo=WO(key),s=w['s'+n];
+  S._exbuf=wo.ex.map((_,ei)=>!!s.ex[ei]);
+  showModal(`<h2 style="font-size:20px">${t('session')} ${n} · ${esc(wo.name)}</h2>
+    <div class="exlist" style="margin:8px 0 4px">${wo.ex.map((e,ei)=>`<div class="ex ${s.ex[ei]?'on':''}">
+      <div class="exbox" onclick="tEx(${ei},this)">${s.ex[ei]?'✓':''}</div>
+      <div class="info"><div class="en">${esc(e.n)}</div><div class="em">${esc(e.m)}</div></div>
+      <div class="kgin"><input id="sx_wt${ei}" placeholder="kg" value="${esc(s.wt[ei]||'')}"></div></div>`).join("")}</div>
+    <label class="chk" style="margin-top:12px"><input type="checkbox" id="sx_done" ${s.done?'checked':''}>${t('wholeDone')}</label>
+    <label class="f"><span class="lab">${t('date')}</span><input class="inp" id="sx_date" type="date" value="${esc(s.date)}"></label>
+    <label class="f"><span class="lab">${t('notes')}</span><textarea class="inp" id="sx_notes">${esc(s.notes)}</textarea></label>
+    <button class="btn" onclick="saveSession('${id}',${i},${n})">${t('save')}</button>`);}
+function tEx(ei,el){S._exbuf[ei]=!S._exbuf[ei];el.parentElement.classList.toggle('on',S._exbuf[ei]);el.textContent=S._exbuf[ei]?'✓':'';}
+async function saveSession(id,i,n){const c=await getClient(id),w=c.weeks[i],key=ww(i)[n-1],wo=WO(key),s=w['s'+n];
+  s.done=document.getElementById('sx_done').checked;s.date=v('sx_date');s.notes=v('sx_notes');
+  s.ex=wo.ex.map((_,ei)=>S._exbuf[ei]||false);s.wt=wo.ex.map((_,ei)=>v('sx_wt'+ei));
+  await saveClient(c);closeModal();toast(t('saved'));render();}
 
 /* ===== baseline / starter / grad ===== */
 function baseCard(c,edit){const d=c.day1,st=(x,kk,u)=>`<div class="stat"><div class="v">${x?esc(x):'—'}${x?`<span style="font-size:12px">${u}</span>`:''}</div><div class="k">${kk}</div></div>`;
-  return `<div class="card"><div class="eyebrow">Day 1 · 起点</div>
-    ${d.photo?`<div class="photobox" style="margin-bottom:12px"><img src="${d.photo}"></div>`:(edit?`<div class="photo-ph" onclick="editBase('${c.id}')">＋ Day 1 照片</div>`:'')}
-    <div class="stats">${st(d.weight,'体重','kg')}${st(d.hip,'臀围','cm')}${st(d.waist,'腰围','cm')}</div>
-    ${d.goal?`<div class="note"><b>目标：</b>${esc(d.goal)}</div>`:''}${d.why&&edit?`<div class="note"><b>为什么改变：</b>${esc(d.why)}</div>`:''}
-    ${edit?`<button class="btn ghost sm" style="width:100%;margin-top:12px" onclick="editBase('${c.id}')">编辑 Day 1</button>`:''}</div>`;}
+  return `<div class="card"><div class="eyebrow">${t('day1')}</div>
+    ${d.photo?`<div class="photobox" style="margin-bottom:12px"><img src="${d.photo}"></div>`:(edit?`<div class="photo-ph" onclick="editBase('${c.id}')">${t('addPhoto')}</div>`:'')}
+    <div class="stats">${st(d.weight,t('weight'),'kg')}${st(d.hip,t('hip'),'cm')}${st(d.waist,t('waist'),'cm')}</div>
+    ${d.goal?`<div class="note"><b>${t('goalLabel')}：</b>${esc(d.goal)}</div>`:''}${d.why&&edit?`<div class="note"><b>${t('whyChange')}：</b>${esc(d.why)}</div>`:''}
+    ${edit?`<button class="btn ghost sm" style="width:100%;margin-top:12px" onclick="editBase('${c.id}')">${t('editDay1')}</button>`:''}</div>`;}
 async function editBase(id){const c=await getClient(id),d=c.day1;
-  showModal(`<h2 style="font-size:20px">Day 1 · 起点</h2>
-    <div id="phslot">${d.photo?`<div class="photobox"><img src="${d.photo}"></div><button class="smalllink" onclick="clrP('b')">移除照片</button>`:`<div class="photo-ph" id="pb">＋ 上传 Day 1 照片</div>`}</div>
-    <div class="r3" style="margin-top:12px"><label class="f"><span class="lab">体重kg</span><input class="inp" id="b_w" value="${esc(d.weight)}"></label>
-    <label class="f"><span class="lab">臀围cm</span><input class="inp" id="b_h" value="${esc(d.hip)}"></label>
-    <label class="f"><span class="lab">腰围cm</span><input class="inp" id="b_wa" value="${esc(d.waist)}"></label></div>
-    <label class="f"><span class="lab">目标</span><textarea class="inp" id="b_goal">${esc(d.goal)}</textarea></label>
-    <label class="f"><span class="lab">为什么想改变</span><textarea class="inp" id="b_why">${esc(d.why)}</textarea></label>
-    <button class="btn" onclick="saveBase('${id}')">保存</button>`);
-  S._tmp={b:d.photo||""};const pb=document.getElementById("pb");if(pb)pb.onclick=()=>pickPhoto(u=>{S._tmp.b=u;document.getElementById("phslot").innerHTML=`<div class="photobox"><img src="${u}"></div><button class="smalllink" onclick="clrP('b')">移除照片</button>`;});}
-function clrP(kk){S._tmp[kk]="";const slot=kk==='b'?'phslot':'gpslot',btn=kk==='b'?'pb':'gpb';document.getElementById(slot).innerHTML=`<div class="photo-ph" id="${btn}">＋ 上传照片</div>`;document.getElementById(btn).onclick=()=>pickPhoto(u=>{S._tmp[kk]=u;document.getElementById(slot).innerHTML=`<div class="photobox"><img src="${u}"></div><button class="smalllink" onclick="clrP('${kk}')">移除照片</button>`;});}
-async function saveBase(id){const c=await getClient(id);c.day1={photo:(S._tmp&&S._tmp.b)||"",weight:v('b_w'),hip:v('b_h'),waist:v('b_wa'),goal:v('b_goal'),why:v('b_why')};await saveClient(c);closeModal();toast("Day 1 已保存 ✓");render();}
+  showModal(`<h2 style="font-size:20px">${t('day1')}</h2>
+    <div id="phslot">${d.photo?`<div class="photobox"><img src="${d.photo}"></div><button class="smalllink" onclick="clrP('b')">${t('removePhoto')}</button>`:`<div class="photo-ph" id="pb">${t('uploadPhoto')}</div>`}</div>
+    <div class="r3" style="margin-top:12px"><label class="f"><span class="lab">${t('weight')}</span><input class="inp" id="b_w" value="${esc(d.weight)}"></label>
+    <label class="f"><span class="lab">${t('hip')}</span><input class="inp" id="b_h" value="${esc(d.hip)}"></label>
+    <label class="f"><span class="lab">${t('waist')}</span><input class="inp" id="b_wa" value="${esc(d.waist)}"></label></div>
+    <label class="f"><span class="lab">${t('goalLabel')}</span><textarea class="inp" id="b_goal">${esc(d.goal)}</textarea></label>
+    <label class="f"><span class="lab">${t('whyChange')}</span><textarea class="inp" id="b_why">${esc(d.why)}</textarea></label>
+    <button class="btn" onclick="saveBase('${id}')">${t('save')}</button>`);
+  S._tmp={b:d.photo||""};const pb=document.getElementById("pb");if(pb)pb.onclick=()=>pickPhoto(u=>{S._tmp.b=u;document.getElementById("phslot").innerHTML=`<div class="photobox"><img src="${u}"></div><button class="smalllink" onclick="clrP('b')">${t('removePhoto')}</button>`;});}
+function clrP(kk){S._tmp[kk]="";const slot=kk==='b'?'phslot':'gpslot',btn=kk==='b'?'pb':'gpb';document.getElementById(slot).innerHTML=`<div class="photo-ph" id="${btn}">${t('uploadPhoto')}</div>`;document.getElementById(btn).onclick=()=>pickPhoto(u=>{S._tmp[kk]=u;document.getElementById(slot).innerHTML=`<div class="photobox"><img src="${u}"></div><button class="smalllink" onclick="clrP('${kk}')">${t('removePhoto')}</button>`;});}
+async function saveBase(id){const c=await getClient(id);c.day1={photo:(S._tmp&&S._tmp.b)||"",weight:v('b_w'),hip:v('b_h'),waist:v('b_wa'),goal:v('b_goal'),why:v('b_why')};await saveClient(c);closeModal();toast(t('saved'));render();}
 async function editStarter(id,i){const c=await getClient(id),s=c.starter[i];
-  showModal(`<h2 style="font-size:20px">${esc(s.title)}</h2>
-    <label class="chk"><input type="checkbox" id="st_done" ${s.done?'checked':''}>这一堂已完成</label>
-    <label class="f"><span class="lab">日期</span><input class="inp" id="st_date" type="date" value="${esc(s.date)}"></label>
-    <label class="f"><span class="lab">教练备注</span><textarea class="inp" id="st_notes">${esc(s.notes)}</textarea></label>
-    <button class="btn" onclick="saveStarter('${id}',${i})">保存</button>`);}
-async function saveStarter(id,i){const c=await getClient(id);c.starter[i]={...c.starter[i],done:document.getElementById('st_done').checked,date:v('st_date'),notes:v('st_notes')};await saveClient(c);closeModal();toast("已保存 ✓");render();}
+  showModal(`<h2 style="font-size:20px">Starter ${i+1} · ${esc(s.title)}</h2>
+    <label class="chk"><input type="checkbox" id="st_done" ${s.done?'checked':''}>${t('completed')}</label>
+    <label class="f"><span class="lab">${t('date')}</span><input class="inp" id="st_date" type="date" value="${esc(s.date)}"></label>
+    <label class="f"><span class="lab">${t('notes')}</span><textarea class="inp" id="st_notes">${esc(s.notes)}</textarea></label>
+    <button class="btn" onclick="saveStarter('${id}',${i})">${t('save')}</button>`);}
+async function saveStarter(id,i){const c=await getClient(id);c.starter[i]={...c.starter[i],done:document.getElementById('st_done').checked,date:v('st_date'),notes:v('st_notes')};await saveClient(c);closeModal();toast(t('saved'));render();}
 function gradCard(c,edit){const g=c.graduation;
-  return `<div class="section-label">Graduation · 毕业</div><div class="card" style="${g.done?'border:1px solid var(--gold)':''}">
-    ${g.done?`<div style="text-align:center"><div style="font-size:34px">🎓</div><h3 style="font-size:18px">恭喜毕业！</h3><div class="muted" style="font-size:12px">${esc(g.date)}</div></div>
+  return `<div class="section-label">${t('grad')}</div><div class="card" style="${g.done?'border:1px solid var(--gold)':''}">
+    ${g.done?`<div style="text-align:center"><div style="font-size:34px">🎓</div><h3 style="font-size:18px">${t('gradCongrat')}</h3><div class="muted" style="font-size:12px">${esc(g.date)}</div></div>
       ${g.photo?`<div class="photobox" style="margin-top:12px"><img src="${g.photo}"></div>`:''}
-      <div class="stats" style="margin-top:12px"><div class="stat"><div class="v">${g.weight?esc(g.weight):'—'}</div><div class="k">结束体重</div></div>
-      <div class="stat"><div class="v">${g.hip?esc(g.hip):'—'}</div><div class="k">结束臀围</div></div>
-      <div class="stat"><div class="v">${cmp(c)}</div><div class="k">臀围变化</div></div></div>
-      ${g.message?`<div class="note" style="margin-top:10px"><b>教练寄语：</b>${esc(g.message)}</div>`:''}`:`<p class="muted center" style="font-size:13px;padding:4px 0">完成 12 周后，在这里记录毕业成果。</p>`}
-    ${edit?`<button class="btn gold sm" style="width:100%;margin-top:12px" onclick="editGrad('${c.id}')">${g.done?'编辑毕业':'🎓 记录毕业'}</button>`:''}</div>`;}
+      <div class="stats" style="margin-top:12px"><div class="stat"><div class="v">${g.weight?esc(g.weight):'—'}</div><div class="k">${t('endWeight')}</div></div>
+      <div class="stat"><div class="v">${g.hip?esc(g.hip):'—'}</div><div class="k">${t('endHip')}</div></div>
+      <div class="stat"><div class="v">${cmp(c)}</div><div class="k">${t('hipChange')}</div></div></div>
+      ${g.message?`<div class="note" style="margin-top:10px"><b>${t('coachMsg')}：</b>${esc(g.message)}</div>`:''}`:`<p class="muted center" style="font-size:13px;padding:4px 0">${t('gradEmpty')}</p>`}
+    ${edit?`<button class="btn gold sm" style="width:100%;margin-top:12px" onclick="editGrad('${c.id}')">${g.done?t('editGrad'):t('recordGrad')}</button>`:''}</div>`;}
 function cmp(c){const a=parseFloat(c.day1.hip),b=parseFloat(c.graduation.hip);if(isNaN(a)||isNaN(b))return '—';const d=(b-a).toFixed(1);return(d>0?'+':'')+d;}
 async function editGrad(id){const c=await getClient(id),g=c.graduation;
-  showModal(`<h2 style="font-size:20px">🎓 毕业记录</h2>
-    <div id="gpslot">${g.photo?`<div class="photobox"><img src="${g.photo}"></div><button class="smalllink" onclick="clrP('g')">移除照片</button>`:`<div class="photo-ph" id="gpb">＋ 上传毕业照片</div>`}</div>
-    <label class="chk" style="margin-top:12px"><input type="checkbox" id="g_done" ${g.done?'checked':''}>标记为已毕业 🎓</label>
-    <label class="f"><span class="lab">毕业日期</span><input class="inp" id="g_date" type="date" value="${esc(g.date)}"></label>
-    <div class="r3"><label class="f"><span class="lab">结束体重</span><input class="inp" id="g_w" value="${esc(g.weight)}"></label>
-    <label class="f"><span class="lab">结束臀围</span><input class="inp" id="g_h" value="${esc(g.hip)}"></label></div>
-    <label class="f"><span class="lab">教练寄语</span><textarea class="inp" id="g_msg">${esc(g.message)}</textarea></label>
-    <button class="btn gold" onclick="saveGrad('${id}')">保存</button>`);
-  S._tmp={g:g.photo||""};const b=document.getElementById("gpb");if(b)b.onclick=()=>pickPhoto(u=>{S._tmp.g=u;document.getElementById("gpslot").innerHTML=`<div class="photobox"><img src="${u}"></div><button class="smalllink" onclick="clrP('g')">移除照片</button>`;});}
-async function saveGrad(id){const c=await getClient(id);c.graduation={done:document.getElementById('g_done').checked,date:v('g_date'),weight:v('g_w'),hip:v('g_h'),photo:(S._tmp&&S._tmp.g)||"",message:v('g_msg')};await saveClient(c);closeModal();toast("毕业已保存 🎓");render();}
-async function delC(id){showModal(`<h2 style="font-size:20px">删除这位学员？</h2><p class="muted" style="font-size:12.5px;margin:4px 0 14px">会永久删除所有档案，无法复原。</p>
-  <button class="btn" style="background:#c0453a" onclick="doDel('${id}')">确定删除</button><button class="btn ghost" style="margin-top:10px" onclick="closeModal()">取消</button>`);}
-async function doDel(id){try{await db.collection(COL).doc(id).delete();}catch(e){}delete _cache[id];closeModal();toast("已删除");go('clist');}
-
-/* ===== girl pick ===== */
-async function gpickScreen(){const ix=await getIndex();const opts=ix.map(c=>`<option value="${c.id}">${esc(c.name)} · ${esc(c.code)}</option>`).join("");
-  return `<div class="hero"><div class="big">💗</div><h1>我的 Peach 护照</h1><div class="tag">Your 90-Day Journey</div></div>
-    <div class="card"><p class="muted" style="font-size:13px;margin-top:0">选你的名字，或输入教练给你的代号。你只会看到自己的旅程。</p>
-    <select class="select-client" id="pick"><option value="">— 选择我的名字 —</option>${opts}</select>
-    <div class="center muted" style="font-size:12px;margin:4px 0">或</div>
-    <label class="f"><span class="lab">专属代号</span><input class="inp" id="gcode" placeholder="PEACH01" style="text-transform:uppercase"></label>
-    <button class="btn" onclick="gEnter()">进入我的护照 🍑</button></div>
-    <p class="center muted" style="font-size:11.5px">示范：Michelle · PEACH01 已填好，可直接进去看</p>`;}
-async function gEnter(){const sel=document.getElementById("pick").value,code=document.getElementById("gcode").value.trim().toUpperCase();let id=sel;
-  if(!id&&code){const ix=await getIndex();const r=ix.find(x=>(x.code||"").toUpperCase()===code);if(r)id=r.id;}
-  if(!id){toast("选名字或输入正确代号");return;}go('gview',{cid:id});}
+  showModal(`<h2 style="font-size:20px">🎓 ${t('grad')}</h2>
+    <div id="gpslot">${g.photo?`<div class="photobox"><img src="${g.photo}"></div><button class="smalllink" onclick="clrP('g')">${t('removePhoto')}</button>`:`<div class="photo-ph" id="gpb">${t('uploadPhoto')}</div>`}</div>
+    <label class="chk" style="margin-top:12px"><input type="checkbox" id="g_done" ${g.done?'checked':''}>${t('markGrad')}</label>
+    <label class="f"><span class="lab">${t('date')}</span><input class="inp" id="g_date" type="date" value="${esc(g.date)}"></label>
+    <div class="r3"><label class="f"><span class="lab">${t('endWeight')}</span><input class="inp" id="g_w" value="${esc(g.weight)}"></label>
+    <label class="f"><span class="lab">${t('endHip')}</span><input class="inp" id="g_h" value="${esc(g.hip)}"></label></div>
+    <label class="f"><span class="lab">${t('coachMsg')}</span><textarea class="inp" id="g_msg">${esc(g.message)}</textarea></label>
+    <button class="btn gold" onclick="saveGrad('${id}')">${t('save')}</button>`);
+  S._tmp={g:g.photo||""};const b=document.getElementById("gpb");if(b)b.onclick=()=>pickPhoto(u=>{S._tmp.g=u;document.getElementById("gpslot").innerHTML=`<div class="photobox"><img src="${u}"></div><button class="smalllink" onclick="clrP('g')">${t('removePhoto')}</button>`;});}
+async function saveGrad(id){const c=await getClient(id);c.graduation={done:document.getElementById('g_done').checked,date:v('g_date'),weight:v('g_w'),hip:v('g_h'),photo:(S._tmp&&S._tmp.g)||"",message:v('g_msg')};await saveClient(c);closeModal();toast(t('saved'));render();}
+async function delC(id){showModal(`<h2 style="font-size:20px">${t('delStudent')}？</h2><p class="muted" style="font-size:12.5px;margin:4px 0 14px">${t('delConfirm')}</p>
+  <button class="btn" style="background:#c0453a" onclick="doDel('${id}')">${t('confirmDel')}</button><button class="btn ghost" style="margin-top:10px" onclick="closeModal()">${t('cancel')}</button>`);}
+async function doDel(id){try{await db.collection(COL).doc(id).delete();}catch(e){}delete _cache[id];closeModal();toast(t('deleted'));go('clist');}
 
 /* ===== ADMIN ===== */
-function adminLoginScreen(){
-  return `<div class="hero"><div class="big">🔐</div><h1 style="font-size:24px">Admin 登入</h1><div class="tag">仅限管理员</div></div>
-    <div class="card"><p class="muted" style="font-size:13px;margin-top:0">输入管理密码才能修改动作、热身和提醒。</p>
-      <label class="f"><span class="lab">密码</span><input class="inp" id="adpw" type="password" placeholder="••••••" onkeydown="if(event.key==='Enter')adminLogin()"></label>
-      <button class="btn" onclick="adminLogin()">进入 Admin</button></div>`;
-}
-function adminLogin(){const pw=v('adpw');if(pw===ADMIN_PW){S.adminUnlocked=true;go('admin');}else{toast("密码错误");}}
-function adminHome(){
-  return `<div style="margin:18px 2px 14px"><div class="eyebrow" style="margin:0">Admin 后台</div><h1 style="font-size:24px">管理设定</h1>
-    <p class="muted" style="font-size:12.5px;margin-top:4px">在这里改的东西，会同步到所有教练和学员的手机。</p></div>
-    <button class="adcard" onclick="go('admin_wopick')"><span class="em">🏋️</span><div><h3>训练动作</h3><div class="s">编辑 Glute A–F 的动作与重量说明</div></div><span class="chev">›</span></button>
-    <button class="adcard" onclick="go('admin_warm')"><span class="em">🔥</span><div><h3>热身动作</h3><div class="s">Dynamic warm-up 清单</div></div><span class="chev">›</span></button>
-    <button class="adcard" onclick="go('admin_rem')"><span class="em">📣</span><div><h3>提醒 / 通知</h3><div class="s">给教练、给学员的提醒</div></div><span class="chev">›</span></button>`;
-}
-function adminWOPick(){
-  const keys=["A","B","C","D","E","F"];
-  return `<div class="backrow"><button class="back" onclick="go('admin')">‹ 返回 Admin</button></div>
-    <h1 style="font-size:22px;margin:2px 2px 12px">选一套训练</h1><div class="rowlist">`+
-    keys.map(k=>`<button class="lrow" onclick="adminEditWO('${k}')"><div class="wnum">${k}</div>
-      <div class="t"><div class="h">${esc(WO(k).name)}</div><div class="s">${WO(k).ex.length} 个动作</div></div><span class="chev">›</span></button>`).join("")+`</div>`;
-}
+function adminHome(){return `<div style="margin:18px 2px 14px"><div class="eyebrow" style="margin:0">${t('admin')}</div><h1 style="font-size:24px">${t('manageSettings')}</h1>
+    <p class="muted" style="font-size:12.5px;margin-top:4px">${t('adminSub')}</p></div>
+    <button class="adcard" onclick="go('admin_coach')"><span class="em">🧑‍🏫</span><div><h3>${t('coachAcc')}</h3><div class="s">${t('coachAccSub')}</div></div><span class="chev">›</span></button>
+    <button class="adcard" onclick="go('admin_wopick')"><span class="em">🏋️</span><div><h3>${t('woCard')}</h3><div class="s">${t('woSub')}</div></div><span class="chev">›</span></button>
+    <button class="adcard" onclick="go('admin_warm')"><span class="em">🔥</span><div><h3>${t('warmCard')}</h3><div class="s">${t('warmSub')}</div></div><span class="chev">›</span></button>
+    <button class="adcard" onclick="go('admin_rem')"><span class="em">📣</span><div><h3>${t('remCard')}</h3><div class="s">${t('remSub')}</div></div><span class="chev">›</span></button>`;}
+/* coaches */
+function adminCoachScreen(){const cs=CFG.coaches||[];
+  const rows=cs.length?cs.map((c,i)=>`<button class="exedit" onclick="editCoach(${i})"><div class="info"><div class="en">${esc(c.name)}</div><div class="em">${esc(c.email)}</div></div><span class="chev">›</span></button>`).join(""):`<div class="emptyx"><p>${t('noCoaches')}</p></div>`;
+  return `<button class="backbtn" onclick="go('admin')">‹ ${t('back')}</button>
+    <h1 style="font-size:22px;margin:6px 2px 12px">${t('coachAccounts')}</h1>${rows}
+    <button class="btn ghost" style="margin-top:6px" onclick="editCoach(-1)">${t('addCoach')}</button>`;}
+function editCoach(i){const c=i>=0?CFG.coaches[i]:{name:"",email:"",password:""};
+  showModal(`<h2 style="font-size:20px">${i>=0?esc(c.name):t('addCoach').replace('＋ ','')}</h2>
+    <label class="f"><span class="lab">${t('name')}</span><input class="inp" id="co_name" value="${esc(c.name)}"></label>
+    <label class="f"><span class="lab">${t('email')}</span><input class="inp" id="co_email" value="${esc(c.email)}" style="text-transform:lowercase"></label>
+    <label class="f"><span class="lab">${t('pw')}</span><input class="inp" id="co_pw" value="${esc(c.password)}"></label>
+    <button class="btn" onclick="saveCoach(${i})">${t('save')}</button>
+    ${i>=0?`<button class="btn ghost" style="margin-top:10px" onclick="delCoach(${i})">${t('del')}</button>`:''}`);}
+async function saveCoach(i){const name=v('co_name'),email=v('co_email').toLowerCase(),pw=v('co_pw');
+  if(!name||!email||!pw){toast(t('fillNamePw'));return;}
+  if(!CFG.coaches)CFG.coaches=[];const rec={name,email,password:pw};
+  if(i>=0)CFG.coaches[i]=rec;else CFG.coaches.push(rec);
+  await saveCfg();closeModal();toast(t('saved'));render();}
+async function delCoach(i){CFG.coaches.splice(i,1);await saveCfg();closeModal();toast(t('deleted'));render();}
+/* workouts */
+function adminWOPick(){const keys=["A","B","C","D","E","F"];
+  return `<button class="backbtn" onclick="go('admin')">‹ ${t('back')}</button><h1 style="font-size:22px;margin:6px 2px 12px">${t('pickWO')}</h1><div class="rowlist">`+
+    keys.map(k=>`<button class="lrow" onclick="adminEditWO('${k}')"><div class="wnum">${k}</div><div class="t"><div class="h">${esc(WO(k).name)}</div><div class="s">${WO(k).ex.length} ${t('exercises')}</div></div><span class="chev">›</span></button>`).join("")+`</div>`;}
 function adminEditWO(k){S._woKey=k;S._woName=WO(k).name;S._wo=JSON.parse(JSON.stringify(WO(k).ex));go('admin_wo');}
 function adminWOScreen(){
-  const rows=S._wo.map((e,i)=>`<div class="exedit"><button class="delx" onclick="delEx(${i})">删除</button>
-    <input class="inp" id="ex_n${i}" placeholder="动作名字" value="${esc(e.n)}">
-    <input class="inp" id="ex_m${i}" placeholder="组数 / 重量说明" value="${esc(e.m)}"></div>`).join("");
-  return `<div class="backrow"><button class="back" onclick="go('admin_wopick')">‹ 返回</button></div>
-    <div style="margin:2px 2px 12px"><div class="eyebrow" style="margin-bottom:4px">编辑训练</div>
-    <input class="inp" id="wo_name" value="${esc(S._woName)}" style="font-family:Fraunces;font-size:18px;font-weight:600"></div>
+  const rows=S._wo.map((e,i)=>`<button class="exedit" onclick="editExPop(${i})"><div class="info"><div class="en">${esc(e.n)||'—'}</div><div class="em">${esc(e.m)}</div></div><span class="chev">›</span></button>`).join("");
+  return `<button class="backbtn" onclick="go('admin_wopick')">‹ ${t('back')}</button>
+    <div style="margin:6px 2px 12px"><div class="eyebrow" style="margin-bottom:4px">${t('editWO')}</div>
+    <input class="inp" id="wo_name" value="${esc(S._woName)}" style="font-family:Fraunces;font-size:18px;font-weight:600" onchange="S._woName=this.value"></div>
     ${rows}
-    <button class="btn ghost" style="margin-bottom:10px" onclick="addEx()">＋ 加一个动作</button>
-    <button class="btn" onclick="saveWO()">保存这套训练</button>`;
-}
-function syncWO(){S._woName=v('wo_name')||S._woName;S._wo=S._wo.map((e,i)=>({n:v('ex_n'+i),m:v('ex_m'+i)}));}
-function addEx(){syncWO();S._wo.push({n:"",m:""});render();}
-function delEx(i){syncWO();S._wo.splice(i,1);render();}
-async function saveWO(){syncWO();const ex=S._wo.filter(e=>e.n);CFG.workouts[S._woKey]={name:S._woName||("Glute "+S._woKey),ex};await saveCfg();toast("训练已更新 ✓，所有人同步");go('admin_wopick');}
-
-function adminWarmScreen(){
-  const rows=(CFG.warmup||[]).map((wm,i)=>`<div class="exedit"><button class="delx" onclick="delWarm(${i})">删除</button>
-    <input class="inp" id="wm_${i}" value="${esc(wm)}" placeholder="热身动作"></div>`).join("");
-  return `<div class="backrow"><button class="back" onclick="go('admin')">‹ 返回 Admin</button></div>
-    <h1 style="font-size:22px;margin:2px 2px 6px">热身动作</h1>
-    <p class="muted" style="font-size:12.5px;margin:0 2px 12px">每一周的训练详情里都会显示这些热身。</p>
-    ${rows}<button class="btn ghost" style="margin-bottom:10px" onclick="addWarm()">＋ 加一个热身</button>
-    <button class="btn" onclick="saveWarm()">保存热身</button>`;
-}
+    <button class="btn ghost" style="margin:4px 0 10px" onclick="editExPop(-1)">${t('addEx')}</button>
+    <button class="btn" onclick="saveWO()">${t('save')}</button>`;}
+function editExPop(i){const e=i>=0?S._wo[i]:{n:"",m:""};
+  showModal(`<h2 style="font-size:20px">${i>=0?t('editWO'):t('addEx').replace('＋ ','')}</h2>
+    <label class="f"><span class="lab">${t('exName')}</span><input class="inp" id="ex_n" value="${esc(e.n)}" placeholder="Hip Thrust"></label>
+    <label class="f"><span class="lab">${t('exPresc')}</span><input class="inp" id="ex_m" value="${esc(e.m)}" placeholder="4×8–10 · 空杆→5kg…"></label>
+    <button class="btn" onclick="saveExPop(${i})">${t('save')}</button>
+    ${i>=0?`<button class="btn ghost" style="margin-top:10px" onclick="delExPop(${i})">${t('del')}</button>`:''}`);}
+function saveExPop(i){const n=v('ex_n'),m=v('ex_m');if(!n){toast(t('fillNamePw'));return;}if(i>=0)S._wo[i]={n,m};else S._wo.push({n,m});closeModal();render();}
+function delExPop(i){S._wo.splice(i,1);closeModal();render();}
+async function saveWO(){S._woName=v('wo_name')||S._woName;CFG.workouts[S._woKey]={name:S._woName||("Glute "+S._woKey),ex:S._wo.filter(e=>e.n)};await saveCfg();toast(t('saved'));go('admin_wopick');}
+/* warmup */
+function adminWarmScreen(){const rows=(CFG.warmup||[]).map((wm,i)=>`<div class="exedit"><input class="inp" id="wm_${i}" value="${esc(wm)}" style="margin:0"><button class="smalllink" onclick="delWarm(${i})" style="flex:none">${t('del')}</button></div>`).join("");
+  return `<button class="backbtn" onclick="go('admin')">‹ ${t('back')}</button><h1 style="font-size:22px;margin:6px 2px 6px">${t('warmTitle')}</h1>
+    <p class="muted" style="font-size:12.5px;margin:0 2px 12px">${t('warmHint')}</p>${rows}
+    <button class="btn ghost" style="margin:4px 0 10px" onclick="addWarm()">${t('addWarm')}</button><button class="btn" onclick="saveWarm()">${t('save')}</button>`;}
 function syncWarm(){CFG.warmup=(CFG.warmup||[]).map((_,i)=>v('wm_'+i));}
 function addWarm(){syncWarm();CFG.warmup.push("");render();}
 function delWarm(i){syncWarm();CFG.warmup.splice(i,1);render();}
-async function saveWarm(){syncWarm();CFG.warmup=CFG.warmup.filter(x=>x);await saveCfg();toast("热身已更新 ✓");go('admin');}
-
-function adminRemScreen(){
-  return `<div class="backrow"><button class="back" onclick="go('admin')">‹ 返回 Admin</button></div>
-    <h1 style="font-size:22px;margin:2px 2px 12px">提醒 / 通知</h1>
-    <div class="card"><div class="eyebrow">📣 给教练看</div>
-      <textarea class="inp" id="rem_coach" placeholder="例：本周记得帮学员做臀围测量并拍照">${esc(CFG.reminders.coach||'')}</textarea>
-      <p class="muted" style="font-size:11.5px;margin:6px 0 0">显示在教练后台顶部</p></div>
-    <div class="card"><div class="eyebrow">💌 给学员看</div>
-      <textarea class="inp" id="rem_student" placeholder="例：记得每次训练后30分钟内补充蛋白～">${esc(CFG.reminders.student||'')}</textarea>
-      <p class="muted" style="font-size:11.5px;margin:6px 0 0">显示在学员护照顶部</p></div>
-    <button class="btn" onclick="saveRem()">保存提醒</button>`;
-}
-async function saveRem(){CFG.reminders={coach:v('rem_coach'),student:v('rem_student')};await saveCfg();toast("提醒已更新 ✓");go('admin');}
+async function saveWarm(){syncWarm();CFG.warmup=CFG.warmup.filter(x=>x);await saveCfg();toast(t('saved'));go('admin');}
+/* reminders */
+function adminRemScreen(){return `<button class="backbtn" onclick="go('admin')">‹ ${t('back')}</button><h1 style="font-size:22px;margin:6px 2px 12px">${t('remTitle')}</h1>
+    <div class="card"><div class="eyebrow">${t('forCoach')}</div><textarea class="inp" id="rem_coach" placeholder="${t('remCoachPh')}">${esc(CFG.reminders.coach||'')}</textarea><p class="muted" style="font-size:11.5px;margin:6px 0 0">${t('forCoachHint')}</p></div>
+    <div class="card"><div class="eyebrow">${t('forStudent')}</div><textarea class="inp" id="rem_student" placeholder="${t('remStuPh')}">${esc(CFG.reminders.student||'')}</textarea><p class="muted" style="font-size:11.5px;margin:6px 0 0">${t('forStudentHint')}</p></div>
+    <button class="btn" onclick="saveRem()">${t('save')}</button>`;}
+async function saveRem(){CFG.reminders={coach:v('rem_coach'),student:v('rem_student')};await saveCfg();toast(t('saved'));go('admin');}
 
 /* ===== modal ===== */
 function showModal(h){const d=document.createElement("div");d.id="mroot";d.style.cssText="position:fixed;inset:0;background:rgba(61,43,51,.42);backdrop-filter:blur(3px);z-index:100;display:flex;align-items:flex-end;justify-content:center";
-  d.innerHTML=`<div style="background:var(--blush);width:100%;max-width:480px;border-radius:24px 24px 0 0;max-height:92vh;overflow-y:auto;padding:20px 18px 30px">${h}</div>`;
+  d.innerHTML=`<div style="background:var(--blush);width:100%;max-width:480px;border-radius:24px 24px 0 0;max-height:92vh;overflow-y:auto;padding:20px 18px 34px">${h}</div>`;
   d.addEventListener("click",e=>{if(e.target.id==="mroot")closeModal();});document.body.appendChild(d);}
 function closeModal(){const m=document.getElementById("mroot");if(m)m.remove();}
 
 /* ===== boot ===== */
-function setupScreen(){app.innerHTML=navbar()+`<div class="wrap"><div class="hero"><div class="big">🍑</div><h1>Peach Passport</h1><div class="tag">Setup</div></div>
-  <div class="card"><div class="eyebrow">还差一步</div><p style="font-size:14px;margin-top:0">这个版本用 Firebase 让所有手机同步，现在还没接上：</p>
-  <div class="note" style="color:var(--bad)"><b>${esc(FB_ERR||"未设定")}</b></div>
-  <div class="note" style="margin-top:12px">如果你已经贴了设定还看到这个，多数是 Firestore 数据库还没建、或网络挡了 Firebase。检查后重新打开。</div></div></div>`;}
 (async function(){
-  if(!FB_OK){setupScreen();return;}
-  app.innerHTML=navbar()+`<div class="wrap"><div class="hero"><div class="big">🍑</div><h1>Peach Passport</h1><div class="tag">载入中…</div></div></div>`;
-  const guard=setTimeout(()=>{app.innerHTML=navbar()+`<div class="wrap"><div class="card"><div class="eyebrow" style="color:var(--bad)">连不上数据库</div><p style="font-size:13.5px;margin:0 0 8px">页面开好了，但连不到 Firestore。多数是这两个原因：</p><ol style="font-size:13px;color:var(--soft);padding-left:20px;line-height:1.7"><li>Firestore Database 还没建立（Firebase Console → Build → Firestore Database → Create）</li><li>规则没开放读写（Rules 分页贴上规则并 Publish）</li></ol></div></div>`;},8000);
-  try{await loadCfg();const ix=await getIndex();if(!ix.length)await saveClient(demo());clearTimeout(guard);render();}
-  catch(e){clearTimeout(guard);app.innerHTML=navbar()+`<div class="wrap"><div class="card"><div class="eyebrow" style="color:var(--bad)">连不上数据库</div><p style="font-size:13.5px;margin:0">Firestore 报错：${esc((e&&e.message)||e)}。<br><br>请确认 Firestore Database 已建立、规则已开放读写。</p></div></div>`;}
+  if(!FB_OK){render();return;}
+  app.innerHTML=navbar()+`<div class="wrap"><div class="hero"><div class="big">🍑</div><h1>Peach Passport</h1><div class="tag">${t('loading')}</div></div></div>`;
+  const guard=setTimeout(()=>{app.innerHTML=navbar()+`<div class="wrap"><div class="card"><div class="eyebrow" style="color:var(--bad)">⚠️</div><p style="font-size:13.5px;margin:0">${t('loadErr')}</p></div></div>`;},8000);
+  try{await loadCfg();const cs=await allClients();if(!cs.length)await saveClient(demo());clearTimeout(guard);render();}
+  catch(e){clearTimeout(guard);app.innerHTML=navbar()+`<div class="wrap"><div class="card"><div class="eyebrow" style="color:var(--bad)">⚠️</div><p style="font-size:13.5px;margin:0">${t('loadErr')}<br><br>${esc((e&&e.message)||e)}</p></div></div>`;}
 })();
 </script>
 </body>

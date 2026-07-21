@@ -130,7 +130,7 @@ textarea.inp{min-height:52px;resize:vertical}
 
 <script>
 /* ===== BUILD VERSION — 确认你载入的是最新档案 ===== */
-const BUILD="v6 · 2026-07-21";
+const BUILD="v8 · project-90503";
 document.getElementById('verBadge').textContent=BUILD;
 function showErr(msg){var b=document.getElementById('errBanner');if(!b)return;b.style.display='block';
   b.innerHTML='⚠️ '+String(msg).replace(/[<>]/g,'')+'<br><span style="font-weight:400;opacity:.85">把这段截图给 Claude</span>'+
@@ -139,18 +139,27 @@ window.onerror=function(m,src,ln,col){showErr(m+"  (line "+ln+")");};
 window.addEventListener('unhandledrejection',function(e){showErr("Promise: "+((e.reason&&e.reason.message)||e.reason));});
 /* ===== Firebase ===== */
 const firebaseConfig = {
-  apiKey: "AIzaSyANx3y_qTMk84gP4PviG_nHTX7DcYE4U4I",
-  authDomain: "peach-project-d33eb.firebaseapp.com",
-  projectId: "peach-project-d33eb",
-  storageBucket: "peach-project-d33eb.firebasestorage.app",
-  messagingSenderId: "887712153845",
-  appId: "1:887712153845:web:3381f5040059f24a08c5bc"
+  apiKey: "AIzaSyA_LVjROIJoPZ7yebztHko-LCc1t-eL__o",
+  authDomain: "peach-project-90503.firebaseapp.com",
+  projectId: "peach-project-90503",
+  storageBucket: "peach-project-90503.firebasestorage.app",
+  messagingSenderId: "632123344940",
+  appId: "1:632123344940:web:7bd9e23ce3537c03312989"
 };
 const COL="peach_clients", CFGID="__config";
 const ADMIN_EMAIL="admin", ADMIN_PW="pp930830";
 let db=null,FB_OK=false,FB_ERR="";
 try{
-  if(firebaseConfig.apiKey && typeof firebase!=="undefined"){firebase.initializeApp(firebaseConfig);db=firebase.firestore();try{db.enablePersistence({synchronizeTabs:true}).catch(function(){});}catch(e){}FB_OK=true;}
+  if(firebaseConfig.apiKey && typeof firebase!=="undefined"){
+    firebase.initializeApp(firebaseConfig);
+    db=firebase.firestore();
+    /* Some networks/proxies block Firestore's default WebChannel transport,
+       which shows up as a SILENT TIMEOUT (not permission-denied).
+       Long-polling goes through plain HTTPS and fixes it. */
+    try{db.settings({experimentalForceLongPolling:true,merge:true});}catch(e){}
+    try{db.enablePersistence({synchronizeTabs:true}).catch(function(){});}catch(e){}
+    FB_OK=true;
+  }
   else if(typeof firebase==="undefined"){FB_ERR="Firebase not loaded";}
 }catch(e){FB_ERR=(e&&e.message)||"init failed";}
 
@@ -378,25 +387,36 @@ async function selfTest(){
   lines.push("Online: "+navigator.onLine);
   showModal(`<h2 style="font-size:20px">🔧 Diagnostics</h2><pre id="dg" style="font-size:11.5px;white-space:pre-wrap;background:#fff;padding:12px;border-radius:12px;line-height:1.6">${esc(lines.join("\n"))}\n\n测试中… / testing…</pre>`);
   const put=s=>{const el=document.getElementById('dg');if(el)el.textContent+="\n"+s;};
+  // ---- REST probe: bypasses the SDK, returns a REAL http status ----
+  put("");put("— REST 直连测试 —");
+  try{
+    const url="https://firestore.googleapis.com/v1/projects/"+firebaseConfig.projectId+
+              "/databases/(default)/documents/"+COL+"?pageSize=1&key="+firebaseConfig.apiKey;
+    const r=await fetch(url);
+    const txt=await r.text();
+    put("HTTP "+r.status);
+    if(r.status===200){put("✅ 数据库存在且可读 — 问题在 SDK 连线方式");}
+    else{
+      let msg=txt;try{const j=JSON.parse(txt);msg=(j.error&&(j.error.status+" · "+j.error.message))||txt;}catch(e){}
+      put(msg.slice(0,300));
+      if(r.status===404)put("👉 404 = 这个 project 里没有 (default) Firestore 数据库，需要建立");
+      if(r.status===403)put("👉 403 = API 未启用 或 规则/金钥限制");
+    }
+  }catch(e){put("❌ REST 也连不上 — "+((e&&e.message)||e));put("👉 多数是网络挡住 firestore.googleapis.com");}
+  put("");put("— SDK 测试 —");
   // READ test
   try{
-    const qs=await Promise.race([db.collection(COL).get(),new Promise((_,r)=>setTimeout(()=>r(new Error("timeout 6s")),6000))]);
+    const qs=await Promise.race([db.collection(COL).get(),new Promise((_,r)=>setTimeout(()=>r(new Error("timeout 10s")),10000))]);
     put("✅ READ ok — "+qs.size+" docs");
   }catch(e){put("❌ READ FAILED — "+((e&&e.code)||"")+" "+((e&&e.message)||e));}
-  // WRITE test (awaits server ack so we see the real error)
+  // WRITE test
   try{
     await Promise.race([
       db.collection(COL).doc("__selftest").set({at:new Date().toISOString(),build:BUILD}),
-      new Promise((_,r)=>setTimeout(()=>r(new Error("timeout 6s — 伺服器没有回应，多数是规则挡住写入")),6000))
+      new Promise((_,r)=>setTimeout(()=>r(new Error("timeout 10s")),10000))
     ]);
     put("✅ WRITE ok — 数据库可以写入");
-  }catch(e){
-    put("❌ WRITE FAILED — "+((e&&e.code)||"")+" "+((e&&e.message)||e));
-    put("");
-    put("👉 多数是 Firestore 规则挡住写入。");
-    put("Firebase Console → Firestore → Rules，改成：");
-    put("allow read, write: if true;  然后 Publish");
-  }
+  }catch(e){put("❌ WRITE FAILED — "+((e&&e.code)||"")+" "+((e&&e.message)||e));}
 }
 
 /* ===== coach list ===== */
